@@ -1,23 +1,22 @@
 package controllers
 
+import authentication.AuthenticationAction
+
+import authentication.AuthenticatedRequest
 import javax.inject.Inject
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request, Results}
 import reactivemongo.play.json.collection.JSONCollection
 
 import scala.concurrent.{ExecutionContext, Future}
 import reactivemongo.play.json._
 import collection._
-import models.{Feed, User}
+import models.{LoginDetails, User}
 import models.JsonFormats._
 import play.api.libs.json.{JsValue, Json}
 import reactivemongo.api.Cursor
+import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 
-import play.modules.reactivemongo.
-{
-  MongoController, ReactiveMongoComponents, ReactiveMongoApi
-}
-
-class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerComponents, val reactiveMongoApi :ReactiveMongoApi )
+class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
   extends AbstractController(components)
     with MongoController with ReactiveMongoComponents
   {
@@ -28,11 +27,10 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
       database.map(_.collection[JSONCollection]("persons"))
     }
 
-    def create :Action[AnyContent] = Action.async
-    {
-      val user = User( 29, "John", "Smith", List(Feed("Slashdot news", "http://slashdot.org/slashdot.rdf")) )
+    def create(comment :String) :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
+      val user = User( request.session.get("username").get, comment )
 
-      val futureResult = collection().flatMap( _.insert.one(user))
+      val futureResult = collection().flatMap(_.insert.one(user))
       futureResult.map( _ => Ok("User Inserted") )
     }
 

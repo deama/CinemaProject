@@ -5,7 +5,10 @@ GET  /  controllers.HomeController.index
 GET   /login  controllers.LoginController.login
 POST  /login  controllers.LoginController.loginSubmit
 
-GET  /createPerson  controllers.ApplicationUsingJsonReadersWriters.create
+GET  /post  controllers.PostController.post
+POST  /post  controllers.PostController.postSubmit
+
+GET  /createPost  controllers.ApplicationUsingJsonReadersWriters.create(comment :String)
 
 POST  /createFromJson  controllers.ApplicationUsingJsonReadersWriters.createFromJson
 
