@@ -1,4 +1,4 @@
-@(posts: List[User])
+@(posts: List[UserComment], form :Form[UserSearchForm])( implicit messagesProvider :MessagesProvider )
 
 @main("List of Posts"){
     <table>
@@ -9,4 +9,11 @@
             </tr>
         }
     </table>
+    <br>
+    <div>
+        @helper.form( routes.SearchController.searchByName() ){
+            @helper.inputText( form("name"), '_label -> "name", '_showConstraints -> false )
+            <button type="submit">search by name</button>
+        }
+    </div>
 }
