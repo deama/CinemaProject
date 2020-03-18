@@ -2,7 +2,7 @@ package controllers
 
 import authentication.AuthenticationAction
 import javax.inject.{Inject, Singleton}
-import models.{PostDetails, UserSearchForm}
+import models.{PostDetails, UserComment, UserSearchForm}
 import play.api.mvc.{AbstractController, Action, AnyContent, Call, ControllerComponents, Request}
 
 @Singleton
@@ -10,7 +10,7 @@ class SearchController @Inject()(cc: ControllerComponents, authAction: Authentic
 {
   def searchByName() :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
     UserSearchForm.searchForm.bindFromRequest.fold({ formWithErrors =>
-      BadRequest( views.html.view_all_posts(List.empty, formWithErrors) )
+      BadRequest( views.html.view_all_posts(List.empty, formWithErrors, UserComment.userForm) )
     }, { searchDetails =>
       Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPostsFromUser(searchDetails.name) )
     })

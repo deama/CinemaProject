@@ -2,7 +2,7 @@ package controllers
 
 import authentication.AuthenticationAction
 import javax.inject.{Inject, Singleton}
-import models.PostDetails
+import models.{PostDetails, UserComment, UserSearchForm}
 import play.api.mvc.{AbstractController, Action, AnyContent, Call, ControllerComponents, Request}
 
 @Singleton
@@ -22,5 +22,9 @@ class PostController @Inject()(cc: ControllerComponents, authAction: Authenticat
 
   def viewAllPosts() :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
     Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
+  }
+
+  def deletePost(id :String) :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
+    Redirect( routes.ApplicationUsingJsonReadersWriters.deletePost(id) )
   }
 }
