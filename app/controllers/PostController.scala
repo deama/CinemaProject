@@ -20,13 +20,7 @@ class PostController @Inject()(cc: ControllerComponents, authAction: Authenticat
     })
   }
 
-  def viewAllPosts() = authAction { implicit request :Request[AnyContent] =>
-    //Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
+  def viewAllPosts() :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
     Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
-
-
-//    println( thing.body.dat )
-//    val list :List[Int] = List(1,2,3,4,5)
-//    Ok( views.html.view_all_posts(list) )
   }
 }
