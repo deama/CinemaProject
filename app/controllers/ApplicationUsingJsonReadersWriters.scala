@@ -1,0 +1,90 @@
+package controllers
+
+import authentication.AuthenticationAction
+import authentication.AuthenticatedRequest
+import javax.inject.Inject
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, MessagesActionBuilder, MessagesRequest, Request, Results}
+import reactivemongo.play.json.collection.JSONCollection
+
+import scala.concurrent.{ExecutionContext, Future}
+import reactivemongo.play.json._
+import collection._
+import models.{LoginDetails, UserComment, UserSearchForm}
+import models.JsonFormats._
+import play.api.i18n.I18nSupport
+import play.api.libs.json.{JsValue, Json}
+import reactivemongo.api.Cursor
+import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
+
+class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
+  extends AbstractController(components)
+    with MongoController with ReactiveMongoComponents with I18nSupport
+  {
+    implicit def ec :ExecutionContext = { components.executionContext }
+
+/*
+    def pokeUserSearchForm() :Action[AnyContent] = Actiion { implicit request: MessagesRequest[AnyContent] =>
+
+      getAllPosts.map { posts =>
+        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
+        //pokeUserSearchForm(posts)
+      }
+      //Ok( views.html.view_all_posts(list, UserSearchForm.searchForm) )
+    }
+
+
+ */
+    def collection() :Future[JSONCollection] =
+    {
+      database.map(_.collection[JSONCollection]("persons"))
+    }
+
+
+
+
+    def create(comment :String) :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
+      val user = UserComment( request.session.get("username").get, comment )
+
+      val futureResult = collection().flatMap(_.insert.one(user))
+      futureResult.map( _ => Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() ) )
+    }
+
+    def getAllPosts()  = Action.async
+    { implicit request :Request[AnyContent] =>
+      val cursor :Future[Cursor[UserComment]] = collection().map
+      {
+        _.find( Json.obj() )
+          .cursor[UserComment]()
+      }
+
+      val futureUsersList :Future[List[UserComment]] =
+        cursor.flatMap (
+          _.collect[List]( -1, Cursor.FailOnError[List[UserComment]]() )
+        )
+
+      futureUsersList.map { posts =>
+        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
+      }
+    }
+
+    def getAllPostsFromUser(name :String) :Action[AnyContent] = Action.async
+    { implicit request :Request[AnyContent] =>
+      val cursor :Future[Cursor[UserComment]] = collection().map
+      {
+        _.find( Json.obj("name" -> name) )
+          .sort( Json.obj("created" -> -1) )
+          .cursor[UserComment]()
+      }
+
+      val futureUsersList :Future[List[UserComment]] =
+        cursor.flatMap (
+          _.collect[List]( -1, Cursor.FailOnError[List[UserComment]]() )
+        )
+
+      futureUsersList.map { posts =>
+        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
+      }
+    }
+
+
+  }
