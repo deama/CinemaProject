@@ -2,11 +2,11 @@ package controllers
 
 import authentication.AuthenticationAction
 import javax.inject.{Inject, Singleton}
-import models.{PostDetails}
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request}
+import models.PostDetails
+import play.api.mvc.{AbstractController, Action, AnyContent, Call, ControllerComponents, Request}
 
 @Singleton
-class PostController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction) extends AbstractController(cc) with play.api.i18n.I18nSupport
+class PostController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction, val app: ApplicationUsingJsonReadersWriters) extends AbstractController(cc) with play.api.i18n.I18nSupport
 {
   def post() :Action[AnyContent] = Action { implicit request :Request[AnyContent] =>
     Ok( views.html.post(PostDetails.postForm) )
@@ -18,5 +18,15 @@ class PostController @Inject()(cc: ControllerComponents, authAction: Authenticat
     }, { postDetails =>
       Redirect( routes.ApplicationUsingJsonReadersWriters.create(postDetails.post) )
     })
+  }
+
+  def viewAllPosts() = authAction { implicit request :Request[AnyContent] =>
+    //Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
+    Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
+
+
+//    println( thing.body.dat )
+//    val list :List[Int] = List(1,2,3,4,5)
+//    Ok( views.html.view_all_posts(list) )
   }
 }

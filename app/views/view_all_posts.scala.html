@@ -1,0 +1,12 @@
+@(posts: List[User])
+
+@main("List of Posts"){
+    <table>
+        @for( post <- posts ) {
+            <tr>
+                <td>@post.name:</td>
+                <td>@post.comment</td>
+            </tr>
+        }
+    </table>
+}

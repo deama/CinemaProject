@@ -31,37 +31,30 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
       val user = User( request.session.get("username").get, comment )
 
       val futureResult = collection().flatMap(_.insert.one(user))
-      futureResult.map( _ => Ok("User Inserted") )
+      futureResult.map( _ => Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() ) )
     }
 
-    def createFromJson :Action[JsValue] = Action.async(parse.json) { request =>
-      request.body.validate[User].map { user =>
-        collection().flatMap( _.insert.one(user) ).map {
-          _ => Ok("User inserted")
-        }
-      }.getOrElse( Future.successful(BadRequest("Invalid json")) )
-    }
-
-    def findByName(lastName :String) :Action[AnyContent] = Action.async
+    def getAllPosts() :Action[AnyContent] = Action.async
     {
       val cursor :Future[Cursor[User]] = collection().map
       {
-        _.find( Json.obj("lastName" -> lastName) )
-         .sort( Json.obj("created" -> -1) )
-         .cursor[User]()
+        _.find( Json.obj() )
+          .cursor[User]()
       }
 
       val futureUsersList :Future[List[User]] =
-      cursor.flatMap (
-        _.collect[List](
-            -1,
-            Cursor.FailOnError[List[User]]()
-          )
-      )
+        cursor.flatMap (
+          _.collect[List]( -1, Cursor.FailOnError[List[User]]() )
+        )
 
-      futureUsersList.map { persons =>
-        Ok(persons.toString)
+      futureUsersList.map { posts =>
+        //var listPosts :String = ""
+        //posts.foreach( post => { listPosts += post + "\n" })
+        //Ok(listPosts)
+        Ok( views.html.view_all_posts(posts) )
       }
+
+      //Ok( "asdf" )
     }
 
 
