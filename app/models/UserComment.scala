@@ -1,13 +1,21 @@
 package models
 
+import play.api.data.Form
+import play.api.data.Forms._
 import play.api.libs.json.OFormat
+import reactivemongo.bson.BSONObjectID
 
-//case class User( age :Int, firstName :String, lastName :String, feeds :List[Feed] )
-case class UserComment(name :String, comment :String )
+case class UserComment( id :String, name :String, comment :String )
+
+object UserComment
+{
+}
 
 object JsonFormats
 {
-  import play.api.libs.json.Json
+  import reactivemongo.play.json._
+  import reactivemongo.play.json.collection.JSONCollection
+  import play.api.libs.json._
 
-  implicit val userFormat :OFormat[UserComment] = Json.format[UserComment]
+  implicit val userCommentFormat :OFormat[UserComment] = Json.format[UserComment]
 }

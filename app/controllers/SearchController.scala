@@ -2,7 +2,7 @@ package controllers
 
 import authentication.AuthenticationAction
 import javax.inject.{Inject, Singleton}
-import models.{PostDetails, UserSearchForm}
+import models.{PostDetails, UserComment, UserSearchForm}
 import play.api.mvc.{AbstractController, Action, AnyContent, Call, ControllerComponents, Request}
 
 @Singleton

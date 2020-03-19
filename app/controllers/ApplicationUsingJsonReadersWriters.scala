@@ -3,18 +3,23 @@ package controllers
 import authentication.AuthenticationAction
 import authentication.AuthenticatedRequest
 import javax.inject.Inject
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, MessagesActionBuilder, MessagesRequest, Request, Results}
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, MessagesActionBuilder, MessagesRequest, Request, Result, Results}
 import reactivemongo.play.json.collection.JSONCollection
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{Await, ExecutionContext, Future}
 import reactivemongo.play.json._
 import collection._
 import models.{LoginDetails, UserComment, UserSearchForm}
 import models.JsonFormats._
+import reactivemongo.bson.BSONObjectID
 import play.api.i18n.I18nSupport
-import play.api.libs.json.{JsValue, Json}
+import play.api.libs.json.{JsValue, Json, OFormat}
 import reactivemongo.api.Cursor
+import reactivemongo.bson.BSONDocument
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
+import reactivemongo.api.commands.WriteResult
+
+import scala.concurrent.duration.Duration
 
 class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
   extends AbstractController(components)
@@ -22,18 +27,6 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
   {
     implicit def ec :ExecutionContext = { components.executionContext }
 
-/*
-    def pokeUserSearchForm() :Action[AnyContent] = Actiion { implicit request: MessagesRequest[AnyContent] =>
-
-      getAllPosts.map { posts =>
-        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
-        //pokeUserSearchForm(posts)
-      }
-      //Ok( views.html.view_all_posts(list, UserSearchForm.searchForm) )
-    }
-
-
- */
     def collection() :Future[JSONCollection] =
     {
       database.map(_.collection[JSONCollection]("persons"))
@@ -43,14 +36,13 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
 
 
     def create(comment :String) :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
-      val user = UserComment( request.session.get("username").get, comment )
+      val user = UserComment(  BSONObjectID.generate().stringify, request.session.get("username").get, comment )
 
-      val futureResult = collection().flatMap(_.insert.one(user))
+      val futureResult = collection().map(_.insert.one(user))
       futureResult.map( _ => Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() ) )
     }
 
-    def getAllPosts()  = Action.async
-    { implicit request :Request[AnyContent] =>
+    def getAllPosts()  = Action.async { implicit request :Request[AnyContent] =>
       val cursor :Future[Cursor[UserComment]] = collection().map
       {
         _.find( Json.obj() )
@@ -63,12 +55,12 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
         )
 
       futureUsersList.map { posts =>
+        posts.foreach(println)
         Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
       }
     }
 
-    def getAllPostsFromUser(name :String) :Action[AnyContent] = Action.async
-    { implicit request :Request[AnyContent] =>
+    def getAllPostsFromUser(name :String) :Action[AnyContent] = Action.async { implicit request :Request[AnyContent] =>
       val cursor :Future[Cursor[UserComment]] = collection().map
       {
         _.find( Json.obj("name" -> name) )
@@ -86,5 +78,16 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
       }
     }
 
+    def deletePost(id :String) :Action[AnyContent] = Action { implicit request :Request[AnyContent] =>
+      Await.result(
+        collection().map
+        {
+          //_.delete().one( BSONDocument("name" -> name, "comment" -> comment) )
+          _.delete().one( BSONDocument("id" -> id) )
+        }, Duration.Inf
+      )
+
+      Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
+    }
 
   }
