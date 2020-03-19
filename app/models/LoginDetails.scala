@@ -7,7 +7,7 @@ case class LoginDetails( username :String, password :String )
 
 object LoginDetails
 {
-  val userList :List[LoginDetails] = List(LoginDetails("admin", "password"))
+  val userList :List[LoginDetails] = List(LoginDetails("admin", "password"), LoginDetails("admin2", "password"))
 
   val loginForm :Form[LoginDetails] = Form(
     mapping(

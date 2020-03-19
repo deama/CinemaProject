@@ -9,6 +9,6 @@ class HomeController @Inject()(cc: ControllerComponents, authAction: Authenticat
 {
   def index() :Action[AnyContent] = authAction
   {
-    Ok( views.html.index("Your new application is ready.") )
+    Ok( views.html.index("Public Chat App") )
   }
 }
