@@ -2,7 +2,7 @@ package controllers
 
 import authentication.AuthenticationAction
 import javax.inject.{Inject, Singleton}
-import models.{PostDetails, UserComment, UserSearchForm}
+import models.{EditForm, PostDetails, UserComment, UserSearchForm}
 import play.api.mvc.{AbstractController, Action, AnyContent, Call, ControllerComponents, Request}
 
 @Singleton
@@ -26,5 +26,13 @@ class PostController @Inject()(cc: ControllerComponents, authAction: Authenticat
 
   def deletePost(id :String) :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
     Redirect( routes.ApplicationUsingJsonReadersWriters.deletePost(id) )
+  }
+
+  def editPost(id :String) :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
+    EditForm.editForm.bindFromRequest.fold({ formWithErrors =>
+      BadRequest( views.html.editPost(formWithErrors, id) )
+    }, { editForm =>
+      Redirect( routes.ApplicationUsingJsonReadersWriters.editPost(id, editForm.newComment) )
+    })
   }
 }

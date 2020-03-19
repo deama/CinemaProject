@@ -55,7 +55,6 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
         )
 
       futureUsersList.map { posts =>
-        posts.foreach(println)
         Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
       }
     }
@@ -82,8 +81,20 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
       Await.result(
         collection().map
         {
-          //_.delete().one( BSONDocument("name" -> name, "comment" -> comment) )
           _.delete().one( BSONDocument("id" -> id) )
+        }, Duration.Inf
+      )
+
+      Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
+    }
+
+    def editPost(id :String, newComment :String) :Action[AnyContent] = Action { implicit request :Request[AnyContent] =>
+      val update = UserComment(  id, request.session.get("username").get, newComment )
+
+      Await.result(
+        collection().map
+        {
+          _.update(ordered=false).one( BSONDocument("id" -> id), update)
         }, Duration.Inf
       )
 
