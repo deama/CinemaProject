@@ -11,8 +11,9 @@ import reactivemongo.play.json._
 import collection._
 import models.{LoginDetails, UserComment, UserSearchForm}
 import models.JsonFormats._
+import reactivemongo.bson.BSONObjectID
 import play.api.i18n.I18nSupport
-import play.api.libs.json.{JsValue, Json}
+import play.api.libs.json.{JsValue, Json, OFormat}
 import reactivemongo.api.Cursor
 import reactivemongo.bson.BSONDocument
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
@@ -52,6 +53,7 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
         )
 
       futureUsersList.map { posts =>
+        posts.foreach(println)
         Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm, UserComment.userForm) )
       }
     }
@@ -75,10 +77,11 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
     }
 
     def deletePost(id :String) :Action[AnyContent] = Action { implicit request :Request[AnyContent] =>
+      val result = id.slice(14, id.length-2)
       collection().map
       {
         //_.delete().one( BSONDocument("name" -> name, "comment" -> comment) )
-        _.delete().one( BSONDocument("_id" -> id ) )
+        _.delete().one( BSONDocument("_id" -> result) )
       }
       //Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
 
