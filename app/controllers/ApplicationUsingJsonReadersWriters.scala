@@ -6,7 +6,7 @@ import javax.inject.Inject
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, MessagesActionBuilder, MessagesRequest, Request, Result, Results}
 import reactivemongo.play.json.collection.JSONCollection
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{Await, ExecutionContext, Future}
 import reactivemongo.play.json._
 import collection._
 import models.{LoginDetails, UserComment, UserSearchForm}
@@ -18,6 +18,8 @@ import reactivemongo.api.Cursor
 import reactivemongo.bson.BSONDocument
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import reactivemongo.api.commands.WriteResult
+
+import scala.concurrent.duration.Duration
 
 class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
   extends AbstractController(components)
@@ -34,9 +36,9 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
 
 
     def create(comment :String) :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
-      val user = UserComment( request.session.get("username").get, comment )
+      val user = UserComment(  BSONObjectID.generate().stringify, request.session.get("username").get, comment )
 
-      val futureResult = collection().flatMap(_.insert.one(user))
+      val futureResult = collection().map(_.insert.one(user))
       futureResult.map( _ => Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() ) )
     }
 
@@ -54,7 +56,7 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
 
       futureUsersList.map { posts =>
         posts.foreach(println)
-        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm, UserComment.userForm) )
+        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
       }
     }
 
@@ -72,18 +74,18 @@ class ApplicationUsingJsonReadersWriters @Inject()(components :ControllerCompone
         )
 
       futureUsersList.map { posts =>
-        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm, UserComment.userForm) )
+        Ok( views.html.view_all_posts(posts, UserSearchForm.searchForm) )
       }
     }
 
     def deletePost(id :String) :Action[AnyContent] = Action { implicit request :Request[AnyContent] =>
-      val result = id.slice(14, id.length-2)
-      collection().map
-      {
-        //_.delete().one( BSONDocument("name" -> name, "comment" -> comment) )
-        _.delete().one( BSONDocument("_id" -> result) )
-      }
-      //Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
+      Await.result(
+        collection().map
+        {
+          //_.delete().one( BSONDocument("name" -> name, "comment" -> comment) )
+          _.delete().one( BSONDocument("id" -> id) )
+        }, Duration.Inf
+      )
 
       Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPosts() )
     }

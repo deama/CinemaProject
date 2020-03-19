@@ -10,7 +10,7 @@ class SearchController @Inject()(cc: ControllerComponents, authAction: Authentic
 {
   def searchByName() :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
     UserSearchForm.searchForm.bindFromRequest.fold({ formWithErrors =>
-      BadRequest( views.html.view_all_posts(List.empty, formWithErrors, UserComment.userForm) )
+      BadRequest( views.html.view_all_posts(List.empty, formWithErrors) )
     }, { searchDetails =>
       Redirect( routes.ApplicationUsingJsonReadersWriters.getAllPostsFromUser(searchDetails.name) )
     })
