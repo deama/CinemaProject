@@ -9,6 +9,7 @@ GET         /post                     controllers.PostController.post
 GET         /allPosts                 controllers.PostController.viewAllPosts
 POST        /post                     controllers.PostController.postSubmit
 GET         /deletePost/:id           controllers.PostController.deletePost(id :String)
+GET         /editPost/:id             controllers.PostController.editPost(id :String)
 
 GET         /viewUserPosts            controllers.SearchController.searchByName
 
@@ -16,3 +17,4 @@ GET         /createPost               controllers.ApplicationUsingJsonReadersWri
 GET         /getAllPosts              controllers.ApplicationUsingJsonReadersWriters.getAllPosts
 GET         /userSpecificPosts        controllers.ApplicationUsingJsonReadersWriters.getAllPostsFromUser(name :String)
 GET         /deletePost               controllers.ApplicationUsingJsonReadersWriters.deletePost(id :String)
+GET         /editPost                 controllers.ApplicationUsingJsonReadersWriters.editPost(id :String, newComment :String)

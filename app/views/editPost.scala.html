@@ -1,0 +1,10 @@
+@(form :Form[EditForm], id :String)( implicit messagesProvider :MessagesProvider )
+
+@main("Edit Post"){
+    <div>
+        @helper.form( routes.PostController.editPost(id) ){
+            @helper.inputText( form("newComment"), '_label -> "newComment", '_showConstraints -> false )
+            <button type="submit">edit</button>
+    }
+    </div>
+}
