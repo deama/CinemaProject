@@ -1,6 +1,7 @@
 @( form :Form[LoginDetails] )( implicit messagesProvider :MessagesProvider )
 
 @main("Login"){
+    <div class="w3-card">
 <div>
     @helper.form( routes.LoginController.loginSubmit() ){
     @helper.inputText( form("username"), '_label -> "Login", '_showConstraints -> false )
