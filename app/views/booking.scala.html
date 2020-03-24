@@ -1,0 +1,18 @@
+@( form :Form[BookingForm] )( implicit messagesProvider :MessagesProvider )
+
+@main("Booking"){
+    <div>
+        @helper.form( routes.HomeController.bookingSubmit() ){
+            @helper.inputText( form("movieTitle"), '_label -> "Movie Title:", '_showConstraints -> false )
+            @helper.inputText( form("screeningTime"), '_label -> "screening:", '_showConstraints -> false )
+            @helper.inputText( form("nameOfBooker"), '_label -> "your name:", '_showConstraints -> false )
+            <div class="seats">
+                @helper.inputText( form("adults"), '_label -> "adults:", '_showConstraints -> false )
+                @helper.inputText( form("children"), '_label -> "children:", '_showConstraints -> false )
+                @helper.inputText( form("concession"), '_label -> "concession:", '_showConstraints -> false )
+            </div>
+            <br>
+            <button type="submit">submit booking</button>
+        }
+    </div>
+}
