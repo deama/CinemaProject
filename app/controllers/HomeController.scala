@@ -5,10 +5,13 @@ import javax.inject._
 import play.api.mvc._
 
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction) extends AbstractController(cc)
-{
-  def index() :Action[AnyContent] = authAction
-  {
-    Ok( views.html.index("") )
+class HomeController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction) extends AbstractController(cc) {
+
+  def index(): Action[AnyContent] = authAction {
+    Ok(views.html.index(""))
+  }
+
+  def times(): Action[AnyContent] = authAction {
+    Ok(views.html.times())
   }
 }
