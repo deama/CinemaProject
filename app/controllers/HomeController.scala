@@ -13,11 +13,11 @@ class HomeController @Inject()(cc: ControllerComponents, authAction: Authenticat
     Ok( views.html.index("") )
   }
 
-  def bookingSubmit() :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
+  def bookingSubmit( movieTitle :String ) :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
     BookingForm.bookingForm.bindFromRequest.fold({ formWithErrors =>
-      BadRequest( views.html.booking(formWithErrors) )
+      BadRequest( views.html.booking(formWithErrors, movieTitle) )
     }, { bookingForm =>
-      Redirect( routes.DBManager.createBooking(bookingForm.movieTitle, bookingForm.screeningTime,
+      Redirect( routes.DBManager.createBooking(movieTitle, bookingForm.screeningTime,
         bookingForm.nameOfBooker, bookingForm.adults, bookingForm.children, bookingForm.concession) )
     })
   }

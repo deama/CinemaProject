@@ -1,9 +1,9 @@
-@( form :Form[BookingForm] )( implicit messagesProvider :MessagesProvider )
+@( form :Form[BookingForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
 
 @main("Booking"){
     <div>
-        @helper.form( routes.HomeController.bookingSubmit() ){
-            @helper.inputText( form("movieTitle"), '_label -> "Movie Title:", '_showConstraints -> false )
+        @helper.form( routes.HomeController.bookingSubmit(movieTitle) ){
+            <h2>@movieTitle</h2>
             @helper.inputText( form("screeningTime"), '_label -> "screening:", '_showConstraints -> false )
             @helper.inputText( form("nameOfBooker"), '_label -> "your name:", '_showConstraints -> false )
             <div class="seats">

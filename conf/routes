@@ -5,6 +5,6 @@ GET         /                     controllers.HomeController.index
 GET         /login                controllers.LoginController.login
 POST        /login                controllers.LoginController.loginSubmit
 
-GET         /booking              controllers.HomeController.bookingSubmit
+GET         /booking              controllers.HomeController.bookingSubmit(movieTitle :String)
 
 GET         /createBooking        controllers.DBManager.createBooking(movieTitle :String, screening :String, userName :String, adults :Int, children :Int, concession :Int)
