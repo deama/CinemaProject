@@ -4,3 +4,7 @@ GET         /                         controllers.HomeController.index
 
 GET         /login                    controllers.LoginController.login
 POST        /login                    controllers.LoginController.loginSubmit
+
+GET         /test                       controllers.ListingGalleryController.test
+
+GET         /hello                      controllers.ListingGalleryController.hello()
