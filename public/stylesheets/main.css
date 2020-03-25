@@ -1,6 +1,7 @@
 p
 {
     margin: 0px;
+    font-color: #d9d9d9;
 }
 
 table
@@ -38,8 +39,9 @@ link {
     max-width: 1500px;
      letter-spacing: 3px;
      margin-right: auto;
-     background-color: azure;
-     w3-color: goldenrod
+     background-color: #000000e0;
+     w3-color: goldenrod;
+     color: #d9d9d9;
 
 }
 

@@ -9,6 +9,6 @@ class HomeController @Inject()(cc: ControllerComponents, authAction: Authenticat
 {
   def index() :Action[AnyContent] = authAction
   {
-    Ok( views.html.index("") )
+    Ok( views.html.home() )
   }
 }
