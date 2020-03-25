@@ -40,9 +40,13 @@ link {
      letter-spacing: 3px;
      margin-right: auto;
      background-color: #000000e0;
-     w3-color: goldenrod;
      color: #d9d9d9;
 
+}
+footer {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 10px;
 }
 
                                                                                                                                                                                                                                                                                                                                                                                                                              </header>
