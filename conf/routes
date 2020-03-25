@@ -6,4 +6,6 @@ GET         /login               controllers.LoginController.login
 
 POST        /login               controllers.LoginController.loginSubmit
 
-GET         /times               controllers.HomeController.times
+GET         /times               controllers.TimesController.times
+
+GET         /screens             controllers.ScreenController.screens

@@ -11,7 +11,6 @@ class HomeController @Inject()(cc: ControllerComponents, authAction: Authenticat
     Ok(views.html.index(""))
   }
 
-  def times(): Action[AnyContent] = authAction {
-    Ok(views.html.times())
-  }
+
+
 }
