@@ -2,7 +2,7 @@
 
 @main("Booking"){
     <div>
-        @helper.form( routes.HomeController.bookingSubmit(movieTitle) ){
+        @helper.form( routes.BookingController.bookingSubmit(movieTitle) ){
             <h2>@movieTitle</h2>
             @helper.inputText( form("screeningTime"), '_label -> "screening:", '_showConstraints -> false )
             @helper.inputText( form("nameOfBooker"), '_label -> "your name:", '_showConstraints -> false )
