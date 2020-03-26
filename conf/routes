@@ -1,6 +1,13 @@
-GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file         controllers.Assets.versioned(path="/public", file: Asset)
 
 GET         /                         controllers.HomeController.index
+GET         /class                    controllers.ClassificationController.index
 
-GET         /login                    controllers.LoginController.login
-POST        /login                    controllers.LoginController.loginSubmit
+GET         /login                controllers.LoginController.login
+POST        /login                controllers.LoginController.loginSubmit
+
+GET         /booking/:movieTitle              controllers.BookingController.bookingSubmit(movieTitle :String)
+GET         /payment              controllers.PaymentController.paymentSubmit()
+
+GET         /createBooking        controllers.DBManager.createBooking(movieTitle :String, screening :String, userName :String, adults :Int, children :Int, concession :Int)
+GET         /createPayment        controllers.DBManager.createPayment(name :String, cardNumber :Int, expDate :String, securityCode :Int)
