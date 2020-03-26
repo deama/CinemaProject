@@ -1,10 +1,26 @@
 package models
 
-class FilmDetails(title: String, description:String, actors:List[String], director:String, posterUrl: String, releaseDate:String) {
-  def getTitle: String = title
-  def getDescription: String = description
-  def getActors: Seq[String] => List[String] = List[String]
-  def getDirector: String = director
-  def getPosterUrl: String = posterUrl
-  def getReleaseDate: String = releaseDate
+import play.api.libs.json.OFormat
+import reactivemongo.bson.BSONObjectID
+
+object FilmDetails {
+  def apply(
+             title: String,
+             director: String,
+             actors: List[String],
+             genre: String,
+             showTimes: List[String],
+             url: String) = new FilmDetails(BSONObjectID.generate(), title, director, actors, genre, showTimes,url)
 }
+
+case class FilmDetails(
+                        _id: BSONObjectID,
+                        title: String,
+                        director: String,
+                        actors: List[String],
+                        genre: String,
+                        showTimes:List[String],
+                        url: String
+                      )
+
+

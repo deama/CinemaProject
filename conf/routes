@@ -8,3 +8,4 @@ POST        /login                    controllers.LoginController.loginSubmit
 GET         /test                       controllers.ListingGalleryController.test
 
 GET         /hello                      controllers.ListingGalleryController.hello()
+GET        /createMovie            controllers.ListingGalleryController.createFilm()
