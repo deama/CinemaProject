@@ -43,10 +43,12 @@ link {
      color: #d9d9d9;
 
 }
-footer {
-    background-color: #F1F1F1;
+.footer {
+    font-family: Raleway, Arial, sans-serif;
+    background-color: #000000e0;
     text-align: center;
     padding: 10px;
+    font-color: #d9d9d9
 }
 
                                                                                                                                                                                                                                                                                                                                                                                                                              </header>
