@@ -2,10 +2,10 @@ package controllers
 
 import java.security.MessageDigest
 import java.util.Date
+
 import org.apache.commons.codec.binary.Base64
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-
 import authentication.AuthenticationAction
 import authentication.AuthenticatedRequest
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import reactivemongo.play.json.collection.JSONCollection
 import scala.concurrent.{Await, ExecutionContext, Future}
 import reactivemongo.play.json._
 import collection._
-import models.{BookingData, PaymentData}
+import models.{BookingData, PaymentData, PaymentForm}
 import reactivemongo.bson.BSONObjectID
 import play.api.i18n.I18nSupport
 import play.api.libs.json.{JsValue, Json, OFormat}
@@ -60,13 +60,14 @@ class DBManager @Inject()(components :ControllerComponents, authAction: Authenti
     val booking = BookingData(  BSONObjectID.generate().stringify, movieTitle, screening, userName, adults, children, concession )
 
     val futureResult = collectionBookings().map(_.insert.one(booking))
-    futureResult.map( _ => Ok("submitted") )
+    //futureResult.map( _ => Ok("submitted") )
+    futureResult.map( _ => Ok( views.html.payment( PaymentForm.paymentForm, movieTitle) ) )
   }
 
-  def createPayment( name :String, cardNumber :Int, expDate :String, securityCode :Int )
+  def createPayment( name :String, cardNumber :Int, expDate :String, securityCode :Int, movieTitle :String )
     :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
 
-    val payment = PaymentData(  BSONObjectID.generate().stringify, hash(name), hash(cardNumber.toString), hash(expDate), hash(securityCode.toString) )
+    val payment = PaymentData(  BSONObjectID.generate().stringify, hash(name), hash(cardNumber.toString), hash(expDate), hash(securityCode.toString), movieTitle )
 
     val futureResult = collectionPayments().map(_.insert.one(payment))
     futureResult.map( _ => Ok("submitted") )

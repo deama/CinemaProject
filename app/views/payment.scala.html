@@ -1,8 +1,9 @@
-@( form :Form[PaymentForm] )( implicit messagesProvider :MessagesProvider )
+@( form :Form[PaymentForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
 
 @main("Payment"){
     <div>
-    @helper.form( routes.PaymentController.paymentSubmit() ){
+    @helper.form( routes.PaymentController.paymentSubmit(movieTitle) ){
+        <h2>Payment for movie: @movieTitle</h2>
         @helper.inputText( form("name"), '_label -> "name:", '_showConstraints -> false )
         @helper.inputText( form("cardNumber"), '_label -> "card number:", '_showConstraints -> false )
         @helper.inputDate( form("expDate"), '_label -> "Expiry date:", '_showConstraints -> false )
