@@ -10,3 +10,7 @@ GET         /test                       controllers.ListingGalleryController.tes
 
 GET        /createFilm           controllers.ListingGalleryController.createFilm
 GET         /listingGallery     controllers.ListingGalleryController.listingGallery
+
+GET        /createFutureFilm              controllers.FutureMoviesController.createFutureFilm
+
+)
