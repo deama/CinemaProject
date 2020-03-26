@@ -6,6 +6,9 @@ GET         /class                    controllers.ClassificationController.index
 GET         /login                controllers.LoginController.login
 POST        /login                controllers.LoginController.loginSubmit
 
+GET         /screens             controllers.ScreenController.screens
+GET         /times               controllers.TimesController.times
+
 GET         /booking/:movieTitle              controllers.BookingController.bookingSubmit(movieTitle :String)
 GET         /payment              controllers.PaymentController.paymentSubmit()
 
