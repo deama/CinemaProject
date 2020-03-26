@@ -1,3 +1,28 @@
-@()
 
-<h1>Hello World!</h1>
+@(filmDetails: List[FilmDetails])
+
+
+@main("Films") {
+
+        <div>
+    @for(filmDetail <- filmDetails){
+            <img src = "@{filmDetail.url}" alt = "film poster" style = "width: 250px; height: 300px;">
+
+            <h3>@filmDetail.title</h3>
+                <h4>Director: @filmDetail.director</h4>
+                <h5>Actors: </h5>
+                <ul>
+                    @for(actor <- filmDetail.actors) {
+                        <li>@actor</li>
+                    }
+                </ul>
+                <h5>Genre: @filmDetail.genre</h5>
+                <h5>Show Times: </h5>
+                <ul>
+                    @for(showTimes <- filmDetail.showTimes) {
+                        <li>@showTimes</li>
+                    }
+                </ul>
+    </div>
+    }
+}

@@ -7,5 +7,6 @@ POST        /login                    controllers.LoginController.loginSubmit
 
 GET         /test                       controllers.ListingGalleryController.test
 
-GET         /hello                      controllers.ListingGalleryController.hello()
-GET        /createMovie            controllers.ListingGalleryController.createFilm()
+
+GET        /createFilm           controllers.ListingGalleryController.createFilm
+GET         /listingGallery     controllers.ListingGalleryController.listingGallery
