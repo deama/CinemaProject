@@ -1,0 +1,33 @@
+@(reviews: List[UserReviewData], form :Form[UserReviewForm])( implicit messagesProvider :MessagesProvider )
+
+@main("Reviews"){
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/reviews.css")">
+    <h1>Reviews</h1>
+    <table>
+    @for( review <- reviews ) {
+        <tr>
+            <td><h2>@review.movieTitle</h2></td>
+        </tr>
+        <tr>
+            <td><span class="reviewLabels">Alias</span> <span class="reviewText">@review.name</span></td><td><span class="reviewLabels">Rating</span> <span class="reviewText">@review.rating/10</span></td>
+        </tr>
+        <tr>
+            <td><span class="reviewLabels">Review</span></td>
+        </tr>
+        <tr>
+            <td><span class="reviewText">@review.review</span></td>
+        </tr>
+    }
+    </table>
+    <br><br><br><br><br><br><br><br>
+    <div>
+    @helper.form( routes.ReviewController.reviewSubmit() ){
+        @helper.inputText( form("movieTitle"), '_label -> "Movie Title:", '_showConstraints -> false )
+        @helper.inputText( form("name"), '_label -> "Alias:", '_showConstraints -> false )
+        @helper.inputText( form("rating"), '_label -> "Rating:", '_showConstraints -> false )
+        @helper.inputText( form("review"), '_label -> "Review", '_showConstraints -> false )
+        <button type="submit">submit</button>
+    }
+    </div>
+    <br><br>
+}
