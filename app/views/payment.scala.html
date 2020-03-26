@@ -1,0 +1,15 @@
+@( form :Form[PaymentForm] )( implicit messagesProvider :MessagesProvider )
+
+@main("Payment"){
+    <div>
+    @helper.form( routes.PaymentController.paymentSubmit() ){
+        @helper.inputText( form("name"), '_label -> "name:", '_showConstraints -> false )
+        @helper.inputText( form("cardNumber"), '_label -> "card number:", '_showConstraints -> false )
+        @helper.inputDate( form("expDate"), '_label -> "Expiry date:", '_showConstraints -> false )
+        @helper.inputText( form("securityCode"), '_label -> "security Code (CVC):", '_showConstraints -> false )
+        </div>
+        <br>
+        <button type="submit">submit payment</button>
+    }
+    </div>
+}
