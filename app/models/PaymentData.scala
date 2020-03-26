@@ -7,7 +7,7 @@ import play.api.data.Forms._
 import play.api.libs.json.OFormat
 import reactivemongo.bson.BSONObjectID
 
-case class PaymentData(id :String, name :String, cardNumber :String, expDate :String, securityCode :String )
+case class PaymentData(id :String, name :String, cardNumber :String, expDate :String, securityCode :String, movieTitle :String )
 
 object PaymentData
 {

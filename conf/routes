@@ -10,7 +10,7 @@ GET         /screens                    controllers.ScreenController.screens
 GET         /times                      controllers.TimesController.times
 
 GET         /booking/:movieTitle        controllers.BookingController.bookingSubmit(movieTitle :String)
-GET         /payment                    controllers.PaymentController.paymentSubmit()
+GET         /payment/:movieTitle        controllers.PaymentController.paymentSubmit(movieTitle :String)
 
 GET         /createBooking              controllers.DBManager.createBooking(movieTitle :String, screening :String, userName :String, adults :Int, children :Int, concession :Int)
-GET         /createPayment              controllers.DBManager.createPayment(name :String, cardNumber :Int, expDate :String, securityCode :Int)
+GET         /createPayment              controllers.DBManager.createPayment(name :String, cardNumber :Int, expDate :String, securityCode :Int, movieTitle :String)
