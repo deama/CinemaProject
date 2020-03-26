@@ -18,3 +18,5 @@ GET         /getAllReviews              controllers.DBManager.getAllReviews()
 GET         /createReview               controllers.DBManager.createReview(name :String, movieTitle :String, rating :String, review :String)
 
 GET         /submitReview               controllers.ReviewController.reviewSubmit()
+
+GET         /gettinghere                controllers.LocationController.gettingHere
