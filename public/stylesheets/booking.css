@@ -1,0 +1,27 @@
+dd.error
+{
+
+}
+
+input[type=text]
+{
+
+    margin-left: -50px;
+    margin-right: -90px;
+    width: 200px;
+}
+.seats input[type=text]
+{
+    width: 15px;
+}
+
+dt
+{
+    width: 120px;
+}
+
+.seats dl, dt, dd:not(.error), .seats :not(.error)
+{
+    display: inline-block;
+    text-align: left;
+}
