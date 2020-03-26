@@ -1,6 +1,7 @@
 @( form :Form[PaymentForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
 
 @main("Payment"){
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/payment.css")">
     <div>
     @helper.form( routes.PaymentController.paymentSubmit(movieTitle) ){
         <h2>Payment for movie: @movieTitle</h2>
