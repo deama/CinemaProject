@@ -13,4 +13,3 @@ GET         /listingGallery     controllers.ListingGalleryController.listingGall
 
 GET        /createFutureFilm              controllers.FutureMoviesController.createFutureFilm
 
-)
