@@ -17,9 +17,9 @@ class ListingGalleryController @Inject() (cc: ControllerComponents, val mongoSer
   }
 
   def createFilm(): Action[AnyContent] = Action.async{
-    val actors = List("Joaquin Pheonix", "Robert De Niro","Frances Conroy")
-    val showTimes = List("12:45","15:45","19:45")
-    val futureResult = mongoService.createMovie(FilmDetails("Joker", "Todd Phillips", actors, "Action", showTimes, "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg"))
+    val actors = List("Daniel Radcliffe", "Rupert Grint","Emma Watson")
+    val showTimes = List("14:00","17:00","21:00")
+    val futureResult = mongoService.createMovie(FilmDetails("Harry Potter and the Deathly Hallows – Part 2", "David Yates", actors, "Fantasy", showTimes, "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTgXSuLAFerQGZdPCWv8EHI_ucQq6RTl3xf91F4aN54PDA_oCtB"))
     futureResult.map(_ => Ok("Movie Created"))
   }
   def listingGallery(): Action[AnyContent] = Action.async {
