@@ -3,24 +3,24 @@
   @main("Future Releases") {
 
     <div>
-    @for(futureFilmDetail <- FutureFilmDetails) {
+    @for(futureFilmDetail <- futureFilmDetails) {
         <img src = "@{
             futureFilmDetail.url
         }" alt = "film poster" style = "width: 250px;
             height: 300px;">
 
         <h3>@futureFilmDetail.title</h3>
-        <h4>Director: @filmDetail.director</h4>
+        <h4>Director: @futureFilmDetail.director</h4>
         <h5>Actors: </h5>
         <ul>
         @for(actor <-futureFilmDetail.actors) {
             <li>@actor</li>
         }
         </ul>
-        <h5>Genre: @filmDetail.genre</h5>
+        <h5>Genre: @futureFilmDetail.genre</h5>
         <h5>Show Times: </h5>
         <ul>
-        @for(showTimes <- filmDetail.showTimes) {
+        @for(showTimes <- futureFilmDetail.showTimes) {
             <li>@showTimes</li>
         }
         </ul>

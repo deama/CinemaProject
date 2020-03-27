@@ -11,9 +11,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class FutureMoviesController @Inject() (cc: ControllerComponents, val mongoService: MongoService) extends AbstractController (cc)
 {
   def createFutureFilm(): Action[AnyContent] = Action.async{
-    val actors = List("Dave", "Rob","Ryan")
-    val showTimes = List("11:45","15:00","19:00")
-    val futureResult = mongoService.createFutureMovie(FutureFilmDetails("Harry Potter","David Yates",actors,"Fantasy",showTimes,"https://vignette.wikia.nocookie.net/harrypotter/images/2/23/Hp6_poster_br.jpg/revision/latest/scale-to-width-down/673?cb=20141215114252"))
+    val actors = List("Tom", "Val","Jennifer")
+    val showTimes = List("15:45","18:00","22:30")
+    val futureResult = mongoService.createFutureMovie(FutureFilmDetails("Top Gun: Maverick","Joseph Kosinski",actors,"Adventure/Action",showTimes,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2NGKKI9_WhX5B8FBicetcfvfNE1g-2e--MvIBGdhNOpmNVmUY"))
     futureResult.map(_ => Ok("New Release Movie Created"))
   }
 
