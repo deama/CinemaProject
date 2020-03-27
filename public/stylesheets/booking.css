@@ -25,3 +25,6 @@ dt
     display: inline-block;
     text-align: left;
 }
+.button{
+    class: btn btn-primary
+}
