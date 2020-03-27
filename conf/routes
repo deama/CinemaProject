@@ -1,6 +1,7 @@
 GET         /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET         /                           controllers.HomeController.index
+
 GET         /class                      controllers.ClassificationController.index
 
 GET         /login                      controllers.LoginController.login
@@ -21,3 +22,14 @@ GET         /reviews                    controllers.ReviewController.viewAllRevi
 GET         /submitReview               controllers.ReviewController.reviewSubmit()
 
 GET         /gettinghere                controllers.LocationController.gettingHere
+
+GET         /test                       controllers.ListingGalleryController.test
+
+
+GET         /createFilm                 controllers.ListingGalleryController.createFilm
+GET         /listingGallery             controllers.ListingGalleryController.listingGallery
+GET         /listingGallery/:_id         controllers.ListingGalleryController.currentFilmsInfo(_id)
+
+GET         /createFutureFilm           controllers.FutureMoviesController.createFutureFilm
+GET         /futureListingGallery        controllers.FutureMoviesController.futureListingsGallery
+GET         /futureListingGallery/:_id  controllers.FutureMoviesController.futureFilmsInfo(_id)
