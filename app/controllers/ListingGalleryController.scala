@@ -27,4 +27,10 @@ class ListingGalleryController @Inject() (cc: ControllerComponents, val mongoSer
       Ok(views.html.listings(filmList))
     )
   }
+  def currentFilmsInfo(id:String): Action[AnyContent] = Action.async{ implicit request:
+    Request[AnyContent] =>
+    mongoService.findCurrentMovies().map{ films =>
+      Ok(views.html.currentFilmsInfo(films.filter(film => id == film._id.toString()).head))
+    }
+  }
 }

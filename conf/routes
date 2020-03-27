@@ -10,6 +10,7 @@ GET         /test                       controllers.ListingGalleryController.tes
 
 GET         /createFilm                 controllers.ListingGalleryController.createFilm
 GET         /listingGallery             controllers.ListingGalleryController.listingGallery
+GET         /listingGallery/:_id         controllers.ListingGalleryController.currentFilmsInfo(_id)
 
 GET         /createFutureFilm           controllers.FutureMoviesController.createFutureFilm
 GET         /futureListingGallery        controllers.FutureMoviesController.futureListingsGallery

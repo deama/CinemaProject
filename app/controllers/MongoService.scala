@@ -56,6 +56,4 @@ class MongoService @Inject()(components :ControllerComponents, authAction: Authe
   }
 
 
-
-
 }

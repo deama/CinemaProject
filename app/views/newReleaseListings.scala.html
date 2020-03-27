@@ -11,19 +11,6 @@
 
         <h3>@futureFilmDetail.title</h3>
         <h4>Director: @futureFilmDetail.director</h4>
-        <h5>Actors: </h5>
-        <ul>
-        @for(actor <-futureFilmDetail.actors) {
-            <li>@actor</li>
-        }
-        </ul>
-        <h5>Genre: @futureFilmDetail.genre</h5>
-        <h5>Show Times: </h5>
-        <ul>
-        @for(showTimes <- futureFilmDetail.showTimes) {
-            <li>@showTimes</li>
-        }
-        </ul>
     </div>
     }
 }
