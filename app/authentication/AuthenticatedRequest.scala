@@ -8,7 +8,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class AuthenticatedRequest[A]( val username :String, request :Request[A] ) extends WrappedRequest[A](request)
 
-class AuthenticationAction @Inject()( val parser: BodyParsers.Default )( implicit val executionContext :ExecutionContext )
+class AuthenticationAction @Inject()( val parser :BodyParsers.Default )( implicit val executionContext :ExecutionContext )
   extends ActionBuilder[AuthenticatedRequest, AnyContent]
 {
   override def invokeBlock[A]( request :Request[A], block :AuthenticatedRequest[A] => Future[Result] ) :Future[Result] =

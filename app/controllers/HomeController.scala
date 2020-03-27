@@ -12,7 +12,4 @@ class HomeController @Inject()(cc: ControllerComponents, authAction: Authenticat
     Ok( views.html.home() )
     //Ok( views.html.booking(BookingForm.bookingForm, "asdf") )
   }
-
-
-
 }
