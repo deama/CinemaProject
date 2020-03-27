@@ -23,4 +23,11 @@ class FutureMoviesController @Inject() (cc: ControllerComponents, val mongoServi
     )
   }
 
+  def futureFilmsInfo(id:String): Action[AnyContent] = Action.async{ implicit request:
+  Request[AnyContent] =>
+    mongoService.findFutureMovies().map{ films =>
+      Ok(views.html.futureFilmsInfo(films.filter(film => id == film._id.toString()).head))
+    }
+  }
+
 }

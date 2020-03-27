@@ -4,6 +4,7 @@
 
     <div>
     @for(futureFilmDetail <- futureFilmDetails) {
+        <a href='/futureListingGallery/@(futureFilmDetail._id)'>
         <img src = "@{
             futureFilmDetail.url
         }" alt = "film poster" style = "width: 250px;
@@ -11,6 +12,7 @@
 
         <h3>@futureFilmDetail.title</h3>
         <h4>Director: @futureFilmDetail.director</h4>
+        </a>
     </div>
     }
 }
