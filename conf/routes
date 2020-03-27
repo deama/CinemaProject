@@ -17,6 +17,7 @@ GET         /createPayment              controllers.DBManager.createPayment(name
 GET         /getAllReviews              controllers.DBManager.getAllReviews()
 GET         /createReview               controllers.DBManager.createReview(name :String, movieTitle :String, rating :String, review :String)
 
+GET         /reviews                    controllers.ReviewController.viewAllReviews()
 GET         /submitReview               controllers.ReviewController.reviewSubmit()
 
 GET         /gettinghere                controllers.LocationController.gettingHere
