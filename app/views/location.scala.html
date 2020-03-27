@@ -1,0 +1,55 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/payment.css")">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark nav nav-pills">
+        <div class="w3-button w3-blue-grey">
+            <div class="w3-text-goldenrod">
+                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Home </a>
+                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Movie Listing </a>
+                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> New Release Gallery </a>
+                <a href="http://localhost:9000/screens" class="nav-item w3-button w3-mobile w3-hover-teal"> Screens</a>
+                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> About Us </a>
+                <input type="text" class="nav-item w3-input" placeholder="Search..">
+                <a href="#" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit">Search</button></a>
+            </div>
+        </div>
+    </nav>
+</head>
+@main("Getting here") {
+    <center>
+
+
+        <div>
+            <h2>Getting here</h2>
+            <p>We are located at: </p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.690530097985!2d-2.288505683975055!3d53.47399067284327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bae15ae0912e7%3A0x39957d91b0a3996f!2sQA!5e0!3m2!1sen!2suk!4v1585234166700!5m2!1sen!2suk"
+            width="600" height="450" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            <ul>
+                <p>Anchorage 1</p>
+                <p>Anchorage Quay Salford</p>
+                <p>The Quays</p>
+                <p>Manchester</p>
+                <p>M50 3YJ</p>
+            </ul>
+            <p>There are several ways of getting here, all outlined below:</p>
+
+            <h3>By car</h3>
+            <p>We are easily located by leaving the M60 at J12, then following signs for The Quays.</p>
+            <p>We are at Anchorage Quay, which you can follow road signage to.</p>
+            <p>Or, you can come off the M60 at J7 and follow the A56 to The Quays and follow road signs to Anchorage Quay.</p>
+            <p>There is a car park adjacent to the building where you can easily find parking spaces.</p>
+
+            <h3>By public transport</h3>
+            <p>To get here via public transport, we are located at the Anchorage Quay Metrolink stop, or alternatively,</p>
+            <p>You can get one of the many bus services to nearby MediaCity UK, which run frequently between 6 am and 11 pm.</p>
+            <p>Spaceship access is unfortunately still under construction.</p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+    </center>
+
+}

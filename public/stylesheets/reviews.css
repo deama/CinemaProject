@@ -1,0 +1,35 @@
+input
+{
+
+}
+
+dd, dt
+{
+    display: inline-block;
+}
+
+h2
+{
+    margin-bottom: 5px;
+}
+
+h1
+{
+    text-align: center;
+}
+
+table, th, td
+{
+    border: 0px solid black;
+}
+
+.reviewText
+{
+    padding: 5px;
+    background-color: #161616;
+}
+
+.reviewLabels
+{
+
+}

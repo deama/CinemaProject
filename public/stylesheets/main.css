@@ -1,6 +1,7 @@
 p
 {
     margin: 0px;
+    font-color: #d9d9d9;
 }
 
 table
@@ -13,3 +14,42 @@ table, th, td
     border: 1px solid black;
     padding: 5px
 }
+
+meta {
+    charset: "UTF-8" name "viewport";
+    content: "width=device-width, initial-scale=1"
+}
+
+link {
+    rel: stylesheet; href: "https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+    rel: stylesheet; href: "https://www.w3schools.com/w3css/4/w3.css";
+    rel: stylesheet; href: "https://fonts.googleapis.com/css?family=Raleway";
+    rel: stylesheet; href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+}
+ h1, header {
+     font-family: Raleway, Arial, sans-serif;
+     font-color: golden;
+     letter-spacing: 6px;
+ }
+.w3-row-padding img {
+     margin-bottom: 12px;
+ }
+ body, header {
+     font-family: Raleway, Arial, sans-serif;
+    max-width: 1500px;
+     letter-spacing: 3px;
+     margin-right: auto;
+     background-color: #000000e0;
+     color: #d9d9d9;
+
+}
+footer {
+    font-family: Raleway, Arial, sans-serif;
+    background-color: #000000e0;
+    text-align: center;
+    padding: 10px;
+    font-color: #d9d9d9
+}
+
+                                                                                                                                                                                                                                                                                                                                                                                                                             </header>
+
