@@ -1,8 +1,8 @@
 @( form :Form[PaymentForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
-
+<body>
 @main("Payment"){
     <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/payment.css")">
-    <div>
+    <div credit-card-box .panel-title, form-control.error, .label, >
     @helper.form( routes.PaymentController.paymentSubmit(movieTitle) ){
         <h2>Payment for movie: @movieTitle</h2>
         @helper.inputText( form("name"), '_label -> "name:", '_showConstraints -> false )
@@ -14,4 +14,5 @@
         <button type="submit">submit payment</button>
     }
     </div>
+</body>
 }
