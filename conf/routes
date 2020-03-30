@@ -31,6 +31,4 @@ GET         /createFilm                       controllers.ListingGalleryControll
 GET         /listingGallery                   controllers.ListingGalleryController.listingGallery
 GET         /listingGallery/:_id              controllers.ListingGalleryController.currentFilmsInfo(_id)
 
-GET         /createFutureFilm                 controllers.FutureMoviesController.createFutureFilm
-GET         /futureListingGallery             controllers.FutureMoviesController.futureListingsGallery
-GET         /futureListingGallery/:_id        controllers.FutureMoviesController.futureFilmsInfo(_id)
+GET         /places                    controllers.placestogoController.places

@@ -1,5 +1,5 @@
 .button {
-    background-color: dodgerblue;
+    background-color: cadetblue;
     class: "btn btn-primary";
     border: none;
     color: white;
@@ -11,9 +11,12 @@
 .button:hover {
     background-color: dodgerblue;
 }
-.border-shade {
-
-}
+/*#bordershade {*/
+/*    border-style: solid;*/
+/*    border-color: black darkred;*/
+/*    border-width: 20px 10px;*/
+/*    text-align: center;*/
+/*}*/
 body, header {
     font-family: Raleway, Arial, sans-serif;
     font-size: 16px;
