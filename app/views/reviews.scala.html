@@ -1,25 +1,8 @@
 @(reviews: List[UserReviewData], form :Form[UserReviewForm])( implicit messagesProvider :MessagesProvider )
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/payment.css")">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark nav nav-pills">
-        <div class="w3-button w3-blue-grey">
-            <div class="w3-text-goldenrod">
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Home </a>
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Movie Listing </a>
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> New Release Gallery </a>
-                <a href="http://localhost:9000/screens" class="nav-item w3-button w3-mobile w3-hover-teal"> Screens</a>
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> About Us </a>
-                <input type="text" class="nav-item w3-input" placeholder="Search..">
-                <a href="#" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit">Search</button></a>
-            </div>
-        </div>
-    </nav>
-</head>
 @main("Reviews"){
+    <head>
+        @navigation.render()
+    </head>
     <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/reviews.css")">
     <h1>Reviews</h1>
     <table>
@@ -44,7 +27,7 @@
         <table>
             <tr>
                 <td>@helper.inputText( form("movieTitle"), '_label -> "Movie Title:", '_showConstraints -> false )</td>
-                <td>@helper.inputText( form("rating"), '_label -> "Rating:", '_showConstraints -> false )</td>
+                <td>@helper.inputText( form("rating"), '_label -> "Rating:", '_showConstraints -> false )</td><td>/10</td>
             </tr>
             <tr>
                 <td>@helper.inputText( form("name"), '_label -> "Alias:", '_showConstraints -> false )</td>

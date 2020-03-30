@@ -1,6 +1,9 @@
 @(futureFilmDetails: List[FutureFilmDetails])
 
   @main("Future Releases") {
+  <head>
+    @navigation.render()
+  </head>
 
     <div>
     @for(futureFilmDetail <- futureFilmDetails) {

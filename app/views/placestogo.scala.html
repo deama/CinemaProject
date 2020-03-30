@@ -5,25 +5,11 @@
         <title>Places</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        @navigation.render()
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/placestogo.css")">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark nav nav-pills">
-            <a class="navbar-brand" href="#"><img src="@routes.Assets.versioned("images/QA.png")" alt="logo" style="width: 40px;"</a>
-            <div class="w3-button w3-blue-grey">
-                <div class="w3-text-goldenrod">
-                    <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Home </a>
-                    <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Movie Listing </a>
-                    <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> New Release Gallery </a>
-                    <a href="http://localhost:9000/screens" class="nav-item w3-button w3-mobile w3-hover-teal"> Screens</a>
-                    <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> About Us </a>
-                    <input type="text" class="nav-item w3-input" placeholder="Search..">
-                    <a href="#" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit">
-                        Search</button></a>
-                </div>
-            </div>
-        </nav>
     </head>
     <body>
 
