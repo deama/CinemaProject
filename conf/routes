@@ -10,6 +10,8 @@ POST        /login                            controllers.LoginController.loginS
 GET         /screens                          controllers.ScreenController.screens
 GET         /times                            controllers.TimesController.times
 
+GET         /contact                    controllers.ContactController.contact
+
 GET         /booking/:id                      controllers.BookingController.booking(id :String)
 POST        /bookingSubmit/:id                controllers.BookingController.bookingSubmit(id :String)
 GET         /payment/:movieId/:movieTitle              controllers.PaymentController.paymentSubmit(movieId :String, movieTitle :String)
