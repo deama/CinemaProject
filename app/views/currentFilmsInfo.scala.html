@@ -1,0 +1,26 @@
+@(filmDetails: FilmDetails)
+
+@main("Current Listed Film") {
+
+    <div>
+        <img src = "@{filmDetails.url}" alt = "film poster" style = "width: 250px; height: 300px;">
+
+        <h3>@filmDetails.title</h3>
+        <h4>Director: @filmDetails.director</h4>
+        <h5>Actors: </h5>
+        <ul>
+        @for(actor <- filmDetails.actors) {
+            <li>@actor</li>
+        }
+        </ul>
+        <h5>Genre: @filmDetails.genre</h5>
+        <h5>Show Times: </h5>
+        <ul>
+        @for(showTimes <- filmDetails.showTimes) {
+            <li>@showTimes</li>
+        }
+        </ul>
+
+        <a href="/booking/@filmDetails._id"><button>book a ticket</button></a>
+    </div>
+}

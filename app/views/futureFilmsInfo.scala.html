@@ -1,0 +1,26 @@
+@(futureFilmDetails: FutureFilmDetails)
+
+@main("Future Listed Films"){
+    <div>
+        <img src = "@{
+            futureFilmDetails.url
+        }" alt = "film poster" style = "width: 250px;
+            height: 300px;">
+
+        <h3>@futureFilmDetails.title</h3>
+        <h4>Director: @futureFilmDetails.director</h4>
+        <h5>Actors: </h5>
+        <ul>
+        @for(actor <-futureFilmDetails.actors) {
+            <li>@actor</li>
+        }
+        </ul>
+        <h5>Genre: @futureFilmDetails.genre</h5>
+        <h5>Show Times: </h5>
+        <ul>
+        @for(showTimes <- futureFilmDetails.showTimes) {
+            <li>@showTimes</li>
+        }
+        </ul>
+    </div>
+}
