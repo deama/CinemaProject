@@ -8,7 +8,7 @@ import models.FutureFilmDetails
 import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class FutureMoviesController @Inject() (cc: ControllerComponents, val mongoService: MongoService) extends AbstractController (cc)
+class FutureMoviesController @Inject() (cc: ControllerComponents, val mongoService: DBManager) extends AbstractController (cc)
 {
   def createFutureFilm(): Action[AnyContent] = Action.async{
     val actors = List("Tom Cruise", "Val Kilmer","Jennifer Connelly")

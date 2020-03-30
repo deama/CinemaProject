@@ -1,4 +1,5 @@
-@( form :Form[BookingForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
+@import views.html.helper.checkbox
+@( form :Form[BookingForm], id :String, movieTitle :String, screeningList :Seq[(String, String)] )( implicit messagesProvider :MessagesProvider )
 
 @main("Booking"){
     <head>
@@ -23,9 +24,9 @@
     </nav>
     </header>
     <div>
-        @helper.form( routes.BookingController.bookingSubmit(movieTitle) ){
+        @helper.form( routes.BookingController.bookingSubmit(id) ){
             <h2>@movieTitle</h2>
-            @helper.inputText( form("screeningTime"), '_label -> "screening:", '_showConstraints -> false )
+            @helper.select( form("screeningTime"), screeningList, 'id -> "screenings", '_help -> "Select one", '_showConstraints -> false )
             @helper.inputText( form("nameOfBooker"), '_label -> "your name:", '_showConstraints -> false )
             <div class="seats">
                 @helper.inputText( form("adults"), '_label -> "adults:", '_showConstraints -> false )

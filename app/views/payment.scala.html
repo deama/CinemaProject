@@ -1,4 +1,4 @@
-@( form :Form[PaymentForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
+@( form :Form[PaymentForm], movieId :String, movieTitle :String )( implicit messagesProvider :MessagesProvider )
 <header>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -23,7 +23,7 @@
 @main("Payment"){
 
     <div credit-card-box .panel-title, form-control.error, .label, >
-    @helper.form( routes.PaymentController.paymentSubmit(movieTitle) ){
+    @helper.form( routes.PaymentController.paymentSubmit(movieId, movieTitle) ){
         <h2>Payment for movie: @movieTitle</h2>
         @helper.inputText( form("name"), '_label -> "name:", '_showConstraints -> false )
         @helper.inputText( form("cardNumber"), '_label -> "card number:", '_showConstraints -> false )

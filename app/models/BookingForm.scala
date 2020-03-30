@@ -12,9 +12,9 @@ object BookingForm
     mapping(
       "screeningTime" -> nonEmptyText,
       "nameOfBooker" -> nonEmptyText,
-      "adults" -> number,
-      "children" -> number,
-      "concession" -> number
+      "adults" -> default( number(max = 10), 0 ),
+      "children" -> default( number(max = 10), 0 ),
+      "concession" -> default( number(max = 10), 0 )
     )(BookingForm.apply)(BookingForm.unapply)
   )
 }

@@ -9,7 +9,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 
 @Singleton
-class ListingGalleryController @Inject() (cc: ControllerComponents, val mongoService: MongoService) extends AbstractController (cc)
+class ListingGalleryController @Inject() (cc: ControllerComponents, val mongoService: DBManager) extends AbstractController (cc)
 {
 
   def test(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
@@ -24,13 +24,12 @@ class ListingGalleryController @Inject() (cc: ControllerComponents, val mongoSer
   }
   def listingGallery(): Action[AnyContent] = Action.async {
     mongoService.findCurrentMovies().map(filmList =>
-      Ok(views.html.listings(filmList))
+      Ok( views.html.listings(filmList) )
     )
   }
-  def currentFilmsInfo(id:String): Action[AnyContent] = Action.async{ implicit request:
-    Request[AnyContent] =>
+  def currentFilmsInfo( id:String ): Action[AnyContent] = Action.async{ implicit request :Request[AnyContent] =>
     mongoService.findCurrentMovies().map{ films =>
-      Ok(views.html.currentFilmsInfo(films.filter(film => id == film._id.toString()).head))
+      Ok( views.html.currentFilmsInfo( films.filter(film => id == film._id.toString()).head ) )
     }
   }
 }
