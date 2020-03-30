@@ -1,6 +1,9 @@
 @(filmDetails: FilmDetails)
 
 @main("Current Listed Film") {
+    <head>
+        @navigation.render()
+    </head>
 
     <div>
         <img src = "@{filmDetails.url}" alt = "film poster" style = "width: 250px; height: 300px;">

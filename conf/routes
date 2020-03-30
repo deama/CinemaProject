@@ -1,36 +1,37 @@
-GET         /assets/*file                     controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                        controllers.Assets.versioned(path="/public", file: Asset)
 
-GET         /                                 controllers.HomeController.index
+GET         /                                    controllers.HomeController.index
 
-GET         /class                            controllers.ClassificationController.index
+GET         /class                               controllers.ClassificationController.index
 
-GET         /login                            controllers.LoginController.login
-POST        /login                            controllers.LoginController.loginSubmit
+GET         /login                               controllers.LoginController.login
+POST        /login                               controllers.LoginController.loginSubmit
 
-GET         /screens                          controllers.ScreenController.screens
-GET         /times                            controllers.TimesController.times
+GET         /screens                             controllers.ScreenController.screens
+GET         /times                               controllers.TimesController.times
 
-GET         /contact                    controllers.ContactController.contact
+GET         /contact                             controllers.ContactController.contact
 
-GET         /booking/:id                      controllers.BookingController.booking(id :String)
-POST        /bookingSubmit/:id                controllers.BookingController.bookingSubmit(id :String)
-GET         /payment/:movieId/:movieTitle              controllers.PaymentController.paymentSubmit(movieId :String, movieTitle :String)
+GET         /booking/:id                         controllers.BookingController.booking(id :String)
+POST        /bookingSubmit/:id                   controllers.BookingController.bookingSubmit(id :String)
+GET         /payment/:movieId/:movieTitle        controllers.PaymentController.paymentSubmit(movieId :String, movieTitle :String)
 
-GET         /createBooking                    controllers.DBManager.createBooking(movieId :String, movieName :String, screening :String, userName :String, adults :Int, children :Int, concession :Int)
-GET         /createPayment                    controllers.DBManager.createPayment(name :String, cardNumber :Int, expDate :String, securityCode :Int, movieTitle :String)
-GET         /getAllReviews                    controllers.DBManager.getAllReviews()
-GET         /createReview                     controllers.DBManager.createReview(name :String, movieTitle :String, rating :String, review :String)
+GET         /createBooking                       controllers.DBManager.createBooking(movieId :String, movieName :String, screening :String, userName :String, adults :Int, children :Int, concession :Int)
+GET         /createPayment                       controllers.DBManager.createPayment(name :String, cardNumber :Int, expDate :String, securityCode :Int, movieTitle :String)
+GET         /getAllReviews                       controllers.DBManager.getAllReviews()
+GET         /createReview                        controllers.DBManager.createReview(name :String, movieTitle :String, rating :String, review :String)
 
-GET         /reviews                          controllers.ReviewController.viewAllReviews()
-GET         /submitReview                     controllers.ReviewController.reviewSubmit()
+GET         /reviews                             controllers.ReviewController.viewAllReviews()
+GET         /submitReview                        controllers.ReviewController.reviewSubmit()
 
-GET         /gettinghere                      controllers.LocationController.gettingHere
+GET         /gettinghere                         controllers.LocationController.gettingHere
 
-GET         /test                             controllers.ListingGalleryController.test
+GET         /createFilm                          controllers.ListingGalleryController.createFilm
+GET         /listingGallery                      controllers.ListingGalleryController.listingGallery
+GET         /listingGallery/:_id                 controllers.ListingGalleryController.currentFilmsInfo(_id)
 
+GET         /createFutureFilm                    controllers.FutureMoviesController.createFutureFilm
+GET         /futureListingGallery                controllers.FutureMoviesController.futureListingsGallery
+GET         /futureListingGallery/:_id           controllers.FutureMoviesController.futureFilmsInfo(_id)
 
-GET         /createFilm                       controllers.ListingGalleryController.createFilm
-GET         /listingGallery                   controllers.ListingGalleryController.listingGallery
-GET         /listingGallery/:_id              controllers.ListingGalleryController.currentFilmsInfo(_id)
-
-GET         /places                    controllers.placestogoController.places
+GET         /places                              controllers.placestogoController.places
