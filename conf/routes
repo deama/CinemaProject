@@ -37,3 +37,5 @@ GET         /futureListingGallery                controllers.FutureMoviesControl
 GET         /futureListingGallery/:_id           controllers.FutureMoviesController.futureFilmsInfo(_id)
 
 GET         /places                              controllers.placestogoController.places
+
+GET         /search/:title                          controllers.SearchController.search(title :String)
