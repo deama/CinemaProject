@@ -30,6 +30,8 @@ GET         /createFilm                          controllers.ListingGalleryContr
 GET         /listingGallery                      controllers.ListingGalleryController.listingGallery
 GET         /listingGallery/:_id                 controllers.ListingGalleryController.currentFilmsInfo(_id)
 
+GET         /aboutUs                          controllers.AboutUsController.aboutUs
+
 GET         /createFutureFilm                    controllers.FutureMoviesController.createFutureFilm
 GET         /futureListingGallery                controllers.FutureMoviesController.futureListingsGallery
 GET         /futureListingGallery/:_id           controllers.FutureMoviesController.futureFilmsInfo(_id)
