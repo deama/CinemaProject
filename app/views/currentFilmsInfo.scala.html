@@ -1,6 +1,9 @@
 @(filmDetails: FilmDetails)
 
 @main("Current Listed Film") {
+    <head>
+        @navigation.render()
+    </head>
 
     <div>
         <img src = "@{filmDetails.url}" alt = "film poster" style = "width: 250px; height: 300px;">
@@ -20,6 +23,7 @@
             <li>@showTimes</li>
         }
         </ul>
-    </div>
 
+        <a href="/booking/@filmDetails._id"><button>book a ticket</button></a>
+    </div>
 }

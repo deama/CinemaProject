@@ -1,0 +1,122 @@
+@()
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Places</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        @navigation.render()
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/placestogo.css")">
+    </head>
+    <body>
+
+        <div class="container">
+            <h2>Places to go</h2>
+            <div style="padding: 50px">
+                <div>
+                    <p>Salford Quays provides an environment with multiple attractions to view and things to do. If it's not taking a trip to Old trafford to watch a game then why not go grab a bite at the local nando's? Or if that doesn't meet your taste, then why not go learn about the history of war at the Imperial War Museum. With a range of stuff to do you will never find yourself lost on what to do after you attend our QAC Cinemas experience. </p>
+                </div>
+            </div>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                    <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+
+                    <div class="item active">
+                        <img src="@routes.Assets.versioned("images/nandos2.jpg")"alt="logo" style="width:100%">
+                        <div class="carousel-caption">
+                            <h3>Nando's</h3>
+                            <p>Lowry Plaza, The Quays Unit 2, Digital World Centre, Salford M50 3UB</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="@routes.Assets.versioned("images/imperialwarmuseum.jpg")"alt="logo" style="width:100%">
+                        <div class="carousel-caption">
+                            <h3>Imperial War Museum</h3>
+                            <p> Trafford Wharf Rd, Trafford Park, Stretford, Manchester M17 1TZ</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="@routes.Assets.versioned("images/oldtrafford.jpg")"alt="logo" style="width:100%">
+                        <div class="carousel-caption">
+                            <h3>Manchester United</h3>
+                            <p>Sir Matt Busby Way, Trafford Park, Stretford, Manchester M16 0RA</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                    <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <div style="padding: 50px">
+            <center><div style="display: inline-block">
+                <center><img border="0" src="@routes.Assets.versioned("images/nandoslogo.jpg")" alt="U logo" style="width: 128px;
+                    height: 128px" ;
+                ></center>
+            </div></center>
+            <div>
+                <strong><p>Nando's</p></strong>
+                <p>
+                    Nando's speciality is succulent, Portuguese peri-peri chicken marinated for 24 hours then flame grilled to taste sensational. The chain prides itself on traditional Portuguese hospitality, a fun, laid-back atmosphere and excellent value for money offering bottomless soft drink and great platters to share!</p>
+            </div>
+            <a href="https://www.nandos.co.uk/restaurants/salford-quays">
+                <button class="button">more info </button>
+            </a>
+        </div>
+
+        <div style="padding: 50px">
+            <center><div style="display: inline-block">
+                <center><img border="0" src="@routes.Assets.versioned("images/iwm.png")" alt="U logo" style="width: 128px;
+                    height: 128px" ;
+                ></center>
+            </div></center>
+            <div>
+                <strong><p>Imperial War Museum North</p></strong>
+                <p>
+                    Imperial War Museum North is a museum in the Metropolitan Borough of Trafford in Greater Manchester, England. One of five branches of the Imperial War Museum, it explores the impact of modern conflicts on people and society. It is the first branch of the Imperial War Museum to be located in the north of England.</p>
+            </div>
+            <a href="https://www.iwm.org.uk/visits/iwm-north">
+                <button class="button">more info </button>
+            </a>
+        </div>
+
+        <div style="padding: 50px">
+            <center><div style="display: inline-block">
+                <center><img border="0" src="@routes.Assets.versioned("images/manulogo.png")" alt="U logo" style="width: 128px;
+                    height: 128px" ;
+                ></center>
+            </div></center>
+            <div>
+                <strong><p>Manchester United</p></strong>
+                <p>
+                    Manchester United Football Club is a professional football club based in Old Trafford, Greater Manchester, England, that competes in the Premier League, the top flight of English football.</p>
+            </div>
+            <a href="https://www.manutd.com/">
+                <button class="button">more info </button>
+            </a>
+        </div>
+
+    </body>
+</html>
+

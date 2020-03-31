@@ -1,6 +1,9 @@
 @(futureFilmDetails: FutureFilmDetails)
 
 @main("Future Listed Films"){
+    <head>
+        @navigation.render()
+    </head>
     <div>
         <img src = "@{
             futureFilmDetails.url
