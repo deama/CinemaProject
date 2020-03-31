@@ -1,6 +1,9 @@
+@(form :Form[EmailForm])(implicit messagesProvider: MessagesProvider)
+
 @main("Contact Us") {
     <head>
         @navigation.render()
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/contact.css")">
     </head>
     <center>
         <div>
@@ -8,10 +11,20 @@
             <p>If you need to contact us, please feel free to!</p>
             <p>Our email address is: cinema(at)qa.com</p>
             <p>Our telephone number is: 0161 393 2271</p>
-            <a href="http://localhost:9000/location">
+            <a href="@routes.LocationController.gettingHere">
                 <link ref>
                 <p>Our address can be found here </p>
             </a>
         </div>
     </center>
+    <br><br><br><br><br><br><br><br><br>
+    <p>Email us:</p>
+    @helper.form( routes.ContactController.emailSubmit() ){
+        @helper.inputText( form("address"), '_label -> "Your email:", '_showConstraints -> false )
+        @helper.inputText( form("subject"), '_label -> "Subject:", '_showConstraints -> false )
+        Content:
+        @helper.textarea( form("content"), '_label -> "", '_showConstraints -> false )
+        <button type="submit">submit email</button>
+        <br><br><br><br><br><br>
+        }
 }
