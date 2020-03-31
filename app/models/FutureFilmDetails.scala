@@ -9,8 +9,7 @@ object FutureFilmDetails{
              director: String,
              actors: List[String],
              genre: String,
-             showTimes: List[String],
-             url: String) = new FutureFilmDetails(BSONObjectID.generate(), title, director, actors, genre, showTimes,url)
+             url: String) = new FutureFilmDetails(BSONObjectID.generate(), title, director, actors, genre, url)
   import reactivemongo.play.json._
   import reactivemongo.play.json.collection.JSONCollection
   import play.api.libs.json._
@@ -22,6 +21,5 @@ case class FutureFilmDetails(
                                 director: String,
                                 actors: List[String],
                                 genre: String,
-                                showTimes: List[String],
                                 url: String
                               )
