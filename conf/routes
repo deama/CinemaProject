@@ -35,3 +35,5 @@ GET         /futureListingGallery        controllers.FutureMoviesController.futu
 GET         /futureListingGallery/:_id  controllers.FutureMoviesController.futureFilmsInfo(_id)
 
 GET         /places                    controllers.placestogoController.places
+
+GET         /scrum                    controllers.ScrumDescriptionController.scrum
