@@ -1,6 +1,7 @@
-input
+textarea
 {
-
+    width: 500px;
+    height: 200px;
 }
 
 dd, dt
@@ -29,7 +30,7 @@ table, th, td
     background-color: #161616;
 }
 
-.reviewLabels
+.reviewRating
 {
-
+    width: 800px;
 }

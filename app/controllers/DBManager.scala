@@ -20,6 +20,7 @@ import reactivemongo.api.Cursor
 import reactivemongo.api.commands.WriteResult
 
 import scala.concurrent.duration.Duration
+import scala.io.Source
 
 
 class DBManager @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
@@ -103,8 +104,15 @@ class DBManager @Inject()(components :ControllerComponents, authAction: Authenti
   //----------------------------------------------------------
   def createReview(name :String, movieTitle :String, rating :String, comment :String)
     :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
+    val badWords = "anal,anus,arse,ass,ass fuck,ass hole,assfucker,asshole,assshole,bastard,bitch,black cock,bloody hell,boong,cock,cockfucker,cocksuck,cocksucker,coon,coonnass,crap,cunt,cyberfuck,damn,darn,dick,dirty,douche,dummy,erect,erection,erotic,escort,fag,faggot,fuck,Fuck off,fuck you,fuckass,fuckhole,god damn,gook,hard core,hardcore,homoerotic,hore,lesbian,lesbians,mother fucker,motherfuck,motherfucker,negro,nigger,orgasim,orgasm,penis,penisfucker,piss,piss off,porn,porno,pornography,pussy,retard,sadist,sex,sexy,shit,slut,son of a bitch,suck,tits,viagra,whore,xxx".split(",")
+    var newComment = comment
+    for( badWord <- badWords )
+    {
+      newComment = newComment.replaceAll(badWord, "****")
+    }
 
-    val review :UserReviewData = UserReviewData( BSONObjectID.generate().stringify, name, movieTitle, rating, comment)
+
+    val review :UserReviewData = UserReviewData( BSONObjectID.generate().stringify, name, movieTitle, rating, newComment)
 
     val futureResult = collectionReviews().map(_.insert.one(review))
     futureResult.map( _ => Redirect( routes.ReviewController.viewAllReviews() ) )
