@@ -22,15 +22,21 @@ h1
 table, th, td
 {
     border: 0px solid black;
+    content-align: center
 }
 
 .reviewText
 {
     padding: 5px;
     background-color: #161616;
+    text-align-all: center;
 }
 
-.reviewRating
-{
-    width: 800px;
+body, header {
+    font-family: Raleway, Arial, sans-serif;
+    max-width: 1500px;
+    letter-spacing: 3px;
+    margin-right: auto;
+    background-color: #000000e0;
+    color: #d9d9d9;
 }

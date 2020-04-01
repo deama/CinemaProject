@@ -4,6 +4,7 @@
         @navigation.render()
     </head>
     <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/reviews.css")">
+
     <h1>Reviews</h1>
     <table>
     @for( review <- reviews ) {
@@ -39,7 +40,7 @@
                 <td>@helper.textarea( form("review"), '_label -> "", '_showConstraints -> false )</td>
             </tr>
         </table>
-        <button type="submit">submit</button>
+        <button class="btn btn-primary"type="submit">submit</button>
     }
     </div>
     <br><br>
