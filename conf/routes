@@ -11,6 +11,7 @@ GET         /screens                             controllers.ScreenController.sc
 GET         /times                               controllers.TimesController.times
 
 GET         /contact                             controllers.ContactController.contact
+GET         /submitEmail                         controllers.ContactController.emailSubmit()
 
 GET         /booking/:id                         controllers.BookingController.booking(id :String)
 POST        /bookingSubmit/:id                   controllers.BookingController.bookingSubmit(id :String)
@@ -30,10 +31,12 @@ GET         /createFilm                          controllers.ListingGalleryContr
 GET         /listingGallery                      controllers.ListingGalleryController.listingGallery
 GET         /listingGallery/:_id                 controllers.ListingGalleryController.currentFilmsInfo(_id)
 
-GET         /aboutUs                          controllers.AboutUsController.aboutUs
+GET         /aboutUs                             controllers.AboutUsController.aboutUs
 
 GET         /createFutureFilm                    controllers.FutureMoviesController.createFutureFilm
 GET         /futureListingGallery                controllers.FutureMoviesController.futureListingsGallery
 GET         /futureListingGallery/:_id           controllers.FutureMoviesController.futureFilmsInfo(_id)
 
 GET         /places                              controllers.placestogoController.places
+
+GET         /search/:title                       controllers.SearchController.search(title :String)
