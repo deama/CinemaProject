@@ -19,7 +19,7 @@ GET         /payment/:movieId/:movieTitle        controllers.PaymentController.p
 
 GET         /createBooking                       controllers.DBManager.createBooking(movieId :String, movieName :String, screening :String, userName :String, adults :Int, children :Int, concession :Int)
 GET         /createPayment                       controllers.DBManager.createPayment(name :String, cardNumber :Int, expDate :String, securityCode :Int, movieTitle :String)
-GET         /getAllReviews                      controllers.DBManager.getAllReviews(seq :List[String])
+GET         /getAllReviews                      controllers.DBManager.getAllReviews()
 GET         /createReview                        controllers.DBManager.createReview(name :String, movieTitle :String, rating :String, review :String)
 
 GET         /reviews                             controllers.ReviewController.viewAllReviews()

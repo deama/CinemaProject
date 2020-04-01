@@ -19,6 +19,9 @@ import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMo
 import reactivemongo.api.Cursor
 import reactivemongo.api.commands.WriteResult
 
+import scala.concurrent.duration.Duration
+
+
 class DBManager @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
   extends AbstractController(components)
     with MongoController with ReactiveMongoComponents with I18nSupport {
@@ -107,26 +110,31 @@ class DBManager @Inject()(components :ControllerComponents, authAction: Authenti
     futureResult.map( _ => Redirect( routes.ReviewController.viewAllReviews() ) )
   }
 
-  def getAllReviews(movieList :List[String]) :Action[AnyContent]  = Action.async { implicit request :Request[AnyContent] =>
-    val cursor :Future[Cursor[UserReviewData]] = collectionReviews().map
-    {
-      _.find( Json.obj() )
-        .cursor[UserReviewData]()
-    }
-
-    val futureUsersList :Future[List[UserReviewData]] =
-      cursor.flatMap (
-        _.collect[List]( -1, Cursor.FailOnError[List[UserReviewData]]() )
-      )
-
-    futureUsersList.map { reviews =>
-      val seq = Seq()
-      for( title <- movieList )
-      {
-        seq :+ title
+  def getAllReviews() :Action[AnyContent]  = Action.async { implicit request :Request[AnyContent] =>
+      val cursor: Future[Cursor[UserReviewData]] = collectionReviews().map {
+        _.find(Json.obj())
+          .cursor[UserReviewData]()
       }
-      Ok(views.html.reviews(reviews, UserReviewForm.userReviewForm, seq))
-    }
+
+      val futureUsersList: Future[List[UserReviewData]] =
+        cursor.flatMap(
+          _.collect[List](-1, Cursor.FailOnError[List[UserReviewData]]())
+        )
+
+      val films :Future[List[FilmDetails]] = findCurrentMovies().map { films => films }
+
+      futureUsersList.map { reviews =>
+        Await.result(
+          films.map{ films =>
+            var seq = Seq(("",""))
+            for( film <- films )
+            {
+              seq = seq :+ (film.title, film.title)
+            }
+            Ok(views.html.reviews(reviews, UserReviewForm.userReviewForm, seq))
+          }, Duration.Inf
+        )
+      }
   }
   //----------------------------------------------------------
   //==========================================================

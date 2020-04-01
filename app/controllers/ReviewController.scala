@@ -13,10 +13,10 @@ class ReviewController @Inject()(cc: ControllerComponents, authAction: Authentic
 {
   def reviewSubmit() :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
     db.findCurrentMovies().map { films =>
-      val seq = Seq()
+      var seq = Seq(("",""))
       for( film <- films )
       {
-        seq :+ film.title
+        seq = seq :+ (film.title, film.title)
       }
 
 
@@ -28,14 +28,7 @@ class ReviewController @Inject()(cc: ControllerComponents, authAction: Authentic
     }
   }
 
-  def viewAllReviews() :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
-    db.findCurrentMovies().map { films =>
-      var movieTitleList :List[String] = List()
-      for( film <- films )
-      {
-        movieTitleList :+ film
-      }
-      Redirect(routes.DBManager.getAllReviews(movieTitleList) )
-    }
+  def viewAllReviews() :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
+    Redirect(routes.DBManager.getAllReviews )
   }
 }
