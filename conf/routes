@@ -25,7 +25,7 @@ GET         /createReview                        controllers.DBManager.createRev
 GET         /reviews                             controllers.ReviewController.viewAllReviews()
 GET         /submitReview                        controllers.ReviewController.reviewSubmit()
 
-GET         /gettinghere                         controllers.LocationController.gettingHere
+GET         /gettingHere                         controllers.LocationController.gettingHere
 
 GET         /createFilm                          controllers.ListingGalleryController.createFilm
 GET         /listingGallery                      controllers.ListingGalleryController.listingGallery
