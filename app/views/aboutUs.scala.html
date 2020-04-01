@@ -1,38 +1,111 @@
 @main("About Us") {
     <head>
-    @navigation.render()
+        @navigation.render()
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/scrum.css")">
     </head>
-    <div>
-        <center>
-            <h1>About Us</h1>
-            <p>Why choose QA Cinemas?</p>
-            <p>
-                QA Cinemas was created as a brand in which you will not just watch films,
-                but experience them as well. With a range of the latest, highly anticipated
-                blockbusters always being found on our screens, you'll always be close to
-                the action.</p>
+    <body>
+        <div>
+            <center>
+                <h1>About Us</h1>
+                <p>Why choose QA Cinemas?</p>
+                <p>
+                    QA Cinemas was created as a brand in which you will not just watch films,
+                    but experience them as well. With a range of the latest, highly anticipated
+                    blockbusters always being found on our screens, you'll always be close to
+                    the action.</p>
 
-            <p> A link to the contact page for more information about QA Cinemas can be found below:</p>
-            <a href = "@routes.ContactController.contact()">
-                <link ref>
-                <p>The contact page can be found here</p>
-            </a>
+                <p> A link to the contact page for more information about QA Cinemas can be found below:</p>
+                <a href = "@routes.ContactController.contact()">
+                    <link ref>
+                    <p>The contact page can be found here</p>
+                </a>
 
 
-            <p>Team 4 Members</p>
-            <p>Dymtro Lysak - Team Leader</p>
-            <p>Email: Dmytro.Lysak@@academytrainee.com </p>
-            <p>James Williams</p>
-            <p>Email: James.Williams@@academytrainee.com </p>
-            <p>Leeroy Chiweshe</p>
-            <p>Email: Leeroy.Chiweshe@@academytrainee.com</p>
-            <p>Blake Ezechi</p>
-            <p>Email: Blake.Ezechi@@academytrainee.com</p>
-            <p>Deng Nyuar</p>
-            <p>Email: Deng.Nyuar@@academytrainee.com</p>
-        </center>
-    </div>
-    @footer.render()
+                <p>Team 4 Members</p>
+                <p>Dymtro Lysak - Team Leader</p>
+                <p>Email: Dmytro.Lysak@@academytrainee.com </p>
+                <p>James Williams</p>
+                <p>Email: James.Williams@@academytrainee.com </p>
+                <p>Leeroy Chiweshe</p>
+                <p>Email: Leeroy.Chiweshe@@academytrainee.com</p>
+                <p>Blake Ezechi</p>
+                <p>Email: Blake.Ezechi@@academytrainee.com</p>
+                <p>Deng Nyuar</p>
+                <p>Email: Deng.Nyuar@@academytrainee.com</p>
+            </center>
+        </div>
+
+        <div id="text">
+            <strong><p><u>What is Scrum?</u></p></strong>
+            <p>Scrum is a framework that helps teams work together. Much like a rugby team (where it gets its name) training for the big game, Scrum encourages teams to learn through experiences, self-organize while working on a problem, and reflect on their wins and losses to continuously improve.
+
+                While the Scrum I’m talking about is most frequently used by software development teams, its principles and lessons can be applied to all kinds of teamwork. This is one of the reasons Scrum is so popular. Often thought of as an agile project management framework, Scrum describes a set of meetings, tools, and roles that work in concert to help teams structure and manage their work.</p>
+
+        </div>
+
+        <div id="text1">
+            <strong><p><u>Scrum Stages</u></p></strong>
+            <p><strong>1 Organize the backlog:</strong>
+                Sometimes known as backlog grooming, this event is the responsibility of the product owner. The product owner’s main jobs are to drive the product towards its product vision and have a constant pulse on the market and the customer. Therefore, he/she maintains this list using feedback from users and the development team to help prioritize and keep the list clean and ready to be worked on at any given time.</p>
+
+            <p><strong>2 Sprint planning:</strong>
+                The work to be performed (scope) during the current sprint is planned during this meeting by the entire development team. This meeting is led by the scrum master and is where the team decides on the sprint goal. Specific use stories are then added to the sprint from the product backlog.  These stories always align with the goal and are also agreed upon by the scrum team to be feasible to implement during the sprint.
+
+                At the end of the planning meeting, every scrum member needs to be clear on what can be delivered in the sprint and how the increment can be delivered.</p>
+
+            <p><strong>3 Sprint:</strong>
+                A sprint is the actual time period when the scrum team works together to finish an increment. Two weeks is a pretty typical length for a sprint, though some teams find a week to be easier to scope or a month to be easier to deliver a valuable increment. Dave West, from Scrum.org advises that the more complex the work and the more unknowns, the shorter the sprint should be. But it’s really up to your team, and you shouldn’t be afraid to change it if it’s not working! During this period, the scope can be re-negotiated between the product owner and the development team if necessary. This forms the crux of the empirical nature of scrum.
+
+        <p> All the events — from planning to retrospective — happen during the sprint. Once a certain time interval for a sprint is established, it has to remain consistent throughout the development period. This helps the team learn from past experiences and apply that insight to future sprints.</p>
+
+            <p><strong>4 Daily Scrum or Stand Up:</strong>
+                This is a daily super-short meeting that happens at the same time (usually mornings) and place to keep it simple. Many teams try to complete the meeting in 15 minutes, but that’s just a guideline. This meeting is also called a ‘daily stand-up’ emphasizing that it needs to be a quick one. The goal of the daily scrum is for everyone on the team to be on the same page, aligned with the sprint goal, and to get a plan out for the next 24 hours.
+
+        <p><strong>
+            The stand up is the time to voice any concerns you have with meeting the sprint goal or any blockers.</strong></p>
+
+            A common way to conduct a stand up is for every team member to answers three questions in the context of achieving the sprint goal:
+
+            <p>   •      What did I do yesterday?</p>
+            <p> •      What do I plan to do today?</p>
+            <p> •      Are there any obstacles?</p>
+
+            <p>However, we’ve seen the meeting quickly turn into people reading from their calendars from yesterday and for the next day. The theory behind the stand up is that it keep distracting chatter to a daily meeting, so the team can focus on the work for the rest of the day.  So if it turns into a daily calendar read-out, don’t be afraid to change it up and get creative.</p>
+
+            <p><strong>5 Sprint review:</strong>
+                At the end of the sprint, the team gets together for an informal session to view a demo of, or inspect, the increment. The development team showcases the backlog items that are now ‘Done’ to stakeholders and teammates for feedback. The product owner can decide whether or not to release the increment, although in most cases the increment is released.</p>
+
+            <p>This review meeting is also when the product owner reworks the product backlog based on the current sprint, which can feed into the next sprint planning session. For a one-month sprint, consider time-boxing your sprint review to a maximum of four hours.</p>
+
+            <p><strong>6 Sprint retrospective:</strong>
+                The retrospective is where the team comes together to document and discuss what worked and what didn’t work in a sprint, a project, people or relationships, tools, or even for certain ceremonies. The idea is to create a place where the team can focus on what went well and what needs to be improved for the next time, and less about what went wrong.</p>
+
+        </div>
+
+        <div id="text2">
+            <strong><p><u>How the team used scrum</u></p></strong>
+            <p><strong>Organise the Backlog:</strong>
+                The Product Owner Tadas Vaidotas alerted the team of the type of cinema website that he wanted created in regards to feedback from users which was received.</p>
+            <p><strong>Sprint planning:</strong>
+                After being alerted about what was expected. A trello board was created where different tasks were set to be completed during a period of 4 sprints. Our Scrum Master Dmytro also created a Github Repository and different branches for the team to work on the tasks assigned to them. A mongo database was also created so users details could be inserted and stored for future reference. Each member of the Scrum team picked up a task from the trello board and began working on the task. </p>
+            <p><strong>Sprint:</strong>
+                The Team decided to do 4 sprints in the space of two weeks. Completing each sprint in roughly 3 days.</p>
+            <p><strong>Daily Stand up:</strong>
+                The team help a 15 minute stand up each morning in order to ask each individual the 3 important questions, what did you do yesterday?, What do I plan to do today?, and is there any obstacles. A group call was also held constantly in order for communication, updates and questions to be asked. </p>
+
+        </div>
+
+        <div id="text3">
+            <strong><p> Click the button to learn more about Scrum:<a href="https://www.scrum.org/">
+                <button class="button">Scrum.org </button>
+            </a> </p></strong>
+
+
+        </div>
+        @footer.render()
+
+
+    </body>
 }
 
 
