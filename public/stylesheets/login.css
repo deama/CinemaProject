@@ -1,0 +1,8 @@
+body, header {
+    font-family: Raleway, Arial, sans-serif;
+    max-width: 1500px;
+    letter-spacing: 3px;
+    margin-right: auto;
+    background-color: #000000e0;
+    color: #d9d9d9;
+}
