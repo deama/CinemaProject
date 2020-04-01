@@ -18,15 +18,17 @@
         </div>
     </center>
     <br><br><br><br><br><br><br><br><br>
-    <p>Email us:</p>
+
+    <center><p>Email us:</p></center>
+    <center><table>
     @helper.form( routes.ContactController.emailSubmit() ){
         @helper.inputText( form("address"), '_label -> "Your email:", '_showConstraints -> false )
         @helper.inputText( form("subject"), '_label -> "Subject:", '_showConstraints -> false )
         Content:
         @helper.textarea( form("content"), '_label -> "", '_showConstraints -> false )
-        <button type="submit">submit email</button>
+        <button class="btn btn-primary"type="submit">submit email</button>
         <br><br>
         }
-
+    </table></center>
     @footer.render()
 }
