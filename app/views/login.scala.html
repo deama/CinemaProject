@@ -6,6 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <div class="w3-card">
+        <center><img src="@routes.Assets.versioned("images/logo.png")" class="rounded" alt="DeadPool" style="width:30%"></center>
 <div>
     @helper.form( routes.LoginController.loginSubmit() ){
         <center> @helper.inputText( form("username"), '_label -> "USERNAME", '_showConstraints -> false )</center>
