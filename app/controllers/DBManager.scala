@@ -19,6 +19,10 @@ import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMo
 import reactivemongo.api.Cursor
 import reactivemongo.api.commands.WriteResult
 
+import scala.concurrent.duration.Duration
+import scala.io.Source
+
+
 class DBManager @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
   extends AbstractController(components)
     with MongoController with ReactiveMongoComponents with I18nSupport {
@@ -100,28 +104,45 @@ class DBManager @Inject()(components :ControllerComponents, authAction: Authenti
   //----------------------------------------------------------
   def createReview(name :String, movieTitle :String, rating :String, comment :String)
     :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
+    val badWords = "anal,anus,arse,ass,ass fuck,ass hole,assfucker,asshole,assshole,bastard,bitch,black cock,bloody hell,boong,cock,cockfucker,cocksuck,cocksucker,coon,coonnass,crap,cunt,cyberfuck,damn,darn,dick,dirty,douche,dummy,erect,erection,erotic,escort,fag,faggot,fuck,Fuck off,fuck you,fuckass,fuckhole,god damn,gook,hard core,hardcore,homoerotic,hore,lesbian,lesbians,mother fucker,motherfuck,motherfucker,negro,nigger,orgasim,orgasm,penis,penisfucker,piss,piss off,porn,porno,pornography,pussy,retard,sadist,sex,sexy,shit,slut,son of a bitch,suck,tits,viagra,whore,xxx".split(",")
+    var newComment = comment
+    for( badWord <- badWords )
+    {
+      newComment = newComment.replaceAll(badWord, "****")
+    }
 
-    val review :UserReviewData = UserReviewData( BSONObjectID.generate().stringify, name, movieTitle, rating, comment)
+
+    val review :UserReviewData = UserReviewData( BSONObjectID.generate().stringify, name, movieTitle, rating, newComment)
 
     val futureResult = collectionReviews().map(_.insert.one(review))
-    futureResult.map( _ => Redirect( routes.DBManager.getAllReviews() ) )
+    futureResult.map( _ => Redirect( routes.ReviewController.viewAllReviews() ) )
   }
 
   def getAllReviews() :Action[AnyContent]  = Action.async { implicit request :Request[AnyContent] =>
-    val cursor :Future[Cursor[UserReviewData]] = collectionReviews().map
-    {
-      _.find( Json.obj() )
-        .cursor[UserReviewData]()
-    }
+      val cursor: Future[Cursor[UserReviewData]] = collectionReviews().map {
+        _.find(Json.obj())
+          .cursor[UserReviewData]()
+      }
 
-    val futureUsersList :Future[List[UserReviewData]] =
-      cursor.flatMap (
-        _.collect[List]( -1, Cursor.FailOnError[List[UserReviewData]]() )
-      )
+      val futureUsersList: Future[List[UserReviewData]] =
+        cursor.flatMap(
+          _.collect[List](-1, Cursor.FailOnError[List[UserReviewData]]())
+        )
 
-    futureUsersList.map { reviews =>
-      Ok( views.html.reviews(reviews, UserReviewForm.userReviewForm) )
-    }
+      val films :Future[List[FilmDetails]] = findCurrentMovies().map { films => films }
+
+      futureUsersList.map { reviews =>
+        Await.result(
+          films.map{ films =>
+            var seq = Seq(("",""))
+            for( film <- films )
+            {
+              seq = seq :+ (film.title, film.title)
+            }
+            Ok(views.html.reviews(reviews, UserReviewForm.userReviewForm, seq))
+          }, Duration.Inf
+        )
+      }
   }
   //----------------------------------------------------------
   //==========================================================

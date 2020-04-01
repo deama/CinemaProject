@@ -14,7 +14,7 @@ object UserReviewForm
     mapping(
       "name" -> nonEmptyText,
       "movieTitle" -> nonEmptyText,
-      "rating" -> number,
+      "rating" -> number(max=10),
       "review" -> nonEmptyText
     )(UserReviewForm.apply)(UserReviewForm.unapply)
   )
