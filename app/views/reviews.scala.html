@@ -1,4 +1,4 @@
-@(reviews: List[UserReviewData], form :Form[UserReviewForm])( implicit messagesProvider :MessagesProvider )
+@( reviews: List[UserReviewData], form :Form[UserReviewForm], movieList :Seq[(String, String)] )( implicit messagesProvider :MessagesProvider )
 @main("Reviews"){
     <head>
         @navigation.render()
@@ -26,7 +26,7 @@
     @helper.form( routes.ReviewController.reviewSubmit() ){
         <table>
             <tr>
-                <td>@helper.inputText( form("movieTitle"), '_label -> "Movie Title:", '_showConstraints -> false )</td>
+                <td>@helper.select( form("movieTitle"), movieList, 'id -> "movieTitle", '_help -> "", '_showConstraints -> false )</td>
                 <td>@helper.inputText( form("rating"), '_label -> "Rating:", '_showConstraints -> false )</td><td>/10</td>
             </tr>
             <tr>

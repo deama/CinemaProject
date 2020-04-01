@@ -104,10 +104,10 @@ class DBManager @Inject()(components :ControllerComponents, authAction: Authenti
     val review :UserReviewData = UserReviewData( BSONObjectID.generate().stringify, name, movieTitle, rating, comment)
 
     val futureResult = collectionReviews().map(_.insert.one(review))
-    futureResult.map( _ => Redirect( routes.DBManager.getAllReviews() ) )
+    futureResult.map( _ => Redirect( routes.ReviewController.viewAllReviews() ) )
   }
 
-  def getAllReviews() :Action[AnyContent]  = Action.async { implicit request :Request[AnyContent] =>
+  def getAllReviews(movieList :List[String]) :Action[AnyContent]  = Action.async { implicit request :Request[AnyContent] =>
     val cursor :Future[Cursor[UserReviewData]] = collectionReviews().map
     {
       _.find( Json.obj() )
@@ -120,7 +120,12 @@ class DBManager @Inject()(components :ControllerComponents, authAction: Authenti
       )
 
     futureUsersList.map { reviews =>
-      Ok( views.html.reviews(reviews, UserReviewForm.userReviewForm) )
+      val seq = Seq()
+      for( title <- movieList )
+      {
+        seq :+ title
+      }
+      Ok(views.html.reviews(reviews, UserReviewForm.userReviewForm, seq))
     }
   }
   //----------------------------------------------------------

@@ -6,7 +6,14 @@
     <script>
         function forwardToSearchButton()
         {
-            document.getElementById("buttonSearch").setAttribute("href", @routes.SearchController.search("")+document.getElementById("inputSearch").value );
+            if( document.getElementById("inputSearch").value == "" )
+            {
+                document.getElementById("buttonSearch").setAttribute("href", "" );
+            }
+            else
+            {
+                document.getElementById("buttonSearch").setAttribute("href", @routes.SearchController.search("")+document.getElementById("inputSearch").value );
+            }
         }
     </script>
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
@@ -21,10 +28,10 @@
                         <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Home </a>
                         <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Movie Listing </a>
                         <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> New Release Gallery </a>
-                        <a href="http://localhost:9000/contact" class="nav-item w3-button w3-mobile w3-hover-teal"> Contact </a>
+                        <a href="@routes.ContactController.contact()" class="nav-item w3-button w3-mobile w3-hover-teal"> Contact </a>
                         <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> About Us </a>
                         <input id="inputSearch" type="text" class="nav-item w3-input" placeholder="Search..">
-                        <a href="#" id="buttonSearch" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit" onclick="forwardToSearchButton()">Search</button></a>
+                        <a href="" id="buttonSearch" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit" onclick="forwardToSearchButton()">Search</button></a>
                     </div>
                 </div>
             </nav>
