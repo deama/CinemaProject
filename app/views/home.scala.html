@@ -1,3 +1,4 @@
+@(filmDetails: List[FilmDetails])
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +6,7 @@
     </head>
     <body>
         <center>
-            <center><img src="@routes.Assets.versioned("images/logo.png")" class="rounded" alt="DeadPool" style="width:30%"></center>
+            <center><img src="@routes.Assets.versioned("images/logo.png")" class="rounded" alt="DeadPool" style="width: 30%"></center>
             <br>
             <p>Welcome to the QACinema experience</p>
             <center><p>This website will allow you to book seats for movies on demand.</p></center>
@@ -13,16 +14,25 @@
             <center><p>This website will allow you to book seats for movies on demand.</p></center>
             <center><p>QACinema provides free parking for paying customers just outside our premise.</p></center>
             <br><br>
-            <center><p>New Releases</p></center>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col" style="background-color:#000000e0;"><img src="@routes.Assets.versioned("images/deadpool.png")" class="rounded" alt="DeadPool" style="width:30%"></div>
-                    <div class="col" style="background-color:#000000e0;"><img src="@routes.Assets.versioned("images/deadpool.png")" class="rounded" alt="DeadPool" style="width:30%"></div>
-                    <div class="col" style="background-color:#000000e0;"><img src="@routes.Assets.versioned("images/deadpool.png")" class="rounded" alt="DeadPool" style="width:30%"></div>
+            <p>Current Listings</p>
+            <table> <tr> @for(filmDetail <- filmDetails) {
+                <div class="container-fluid">
+                    <div class="row">
+                        <td>
+                            <a href='/listingGallery/@(filmDetail._id)'>
+                            <div class="col" style="background-color: #000000e0;"> <img src = "@{
+                            filmDetail.url
+                        }" alt = "film poster" style = "width: 250px;
+                            height: 300px;"
+                        /></div>
+                            </a>
+                        </td>
+                    </div>
                 </div>
-            </div>
+            }
+            </tr>
+            </table>
         </center>
-        <center><p>Places To Go</p></center>
 
         @footer.render()
     </body>
