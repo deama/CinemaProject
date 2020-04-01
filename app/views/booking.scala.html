@@ -1,31 +1,15 @@
-@( form :Form[BookingForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
+@import views.html.helper.checkbox
+@( form :Form[BookingForm], id :String, movieTitle :String, screeningList :Seq[(String, String)] )( implicit messagesProvider :MessagesProvider )
 
 @main("Booking"){
     <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/booking.css")">
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/payment.css")">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark nav nav-pills">
-        <div class="w3-button w3-blue-grey">
-            <div class="w3-text-goldenrod">
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Home </a>
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> Movie Listing </a>
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> New Release Gallery </a>
-                <a href="http://localhost:9000/screens" class="nav-item w3-button w3-mobile w3-hover-teal"> Screens</a>
-                <a href="#" class="nav-item w3-button w3-mobile w3-hover-teal"> About Us </a>
-                <input type="text" class="nav-item w3-input" placeholder="Search..">
-                <a href="#" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit">Search</button></a>
-            </div>
-        </div>
-    </nav>
-    </header>
+        @navigation.render()
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/booking.css")">
+    </head>
     <div>
-        @helper.form( routes.BookingController.bookingSubmit(movieTitle) ){
+        @helper.form( routes.BookingController.bookingSubmit(id) ){
             <h2>@movieTitle</h2>
-            @helper.inputText( form("screeningTime"), '_label -> "screening:", '_showConstraints -> false )
+            @helper.select( form("screeningTime"), screeningList, 'id -> "screenings", '_help -> "Select one", '_showConstraints -> false )
             @helper.inputText( form("nameOfBooker"), '_label -> "your name:", '_showConstraints -> false )
             <div class="seats">
                 @helper.inputText( form("adults"), '_label -> "adults:", '_showConstraints -> false )
@@ -37,4 +21,5 @@
             <br><br><br><br><br><br>
         }
     </div>
+    @footer.render()
 }

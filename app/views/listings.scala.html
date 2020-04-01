@@ -2,6 +2,9 @@
 @(filmDetails: List[FilmDetails])
 
 @main("Films") {
+    <head>
+        @navigation.render()
+    </head>
 
     <div>
     @for(filmDetail <- filmDetails){
@@ -16,4 +19,5 @@
     }
     </div>
 
+    @footer.render()
 }
