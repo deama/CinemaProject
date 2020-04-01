@@ -1,6 +1,7 @@
-input
+textarea
 {
-
+    width: 500px;
+    height: 200px;
 }
 
 dd, dt
@@ -31,10 +32,6 @@ table, th, td
     text-align-all: center;
 }
 
-.reviewLabels
-{
-
-}
 body, header {
     font-family: Raleway, Arial, sans-serif;
     max-width: 1500px;

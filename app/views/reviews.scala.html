@@ -1,4 +1,4 @@
-@(reviews: List[UserReviewData], form :Form[UserReviewForm])( implicit messagesProvider :MessagesProvider )
+@( reviews: List[UserReviewData], form :Form[UserReviewForm], movieList :Seq[(String, String)] )( implicit messagesProvider :MessagesProvider )
 @main("Reviews"){
     <head>
         @navigation.render()
@@ -12,7 +12,7 @@
             <td><h2>@review.movieTitle</h2></td>
         </tr>
         <tr>
-            <td><span class="reviewLabels">Alias</span> <span class="reviewText">@review.name</span></td><td><span class="reviewLabels">Rating</span> <span class="reviewText">@review.rating/10</span></td>
+            <td><span class="reviewLabels">Alias</span> <span class="reviewText">@review.name</span></td><td class="reviewRating"><span class="reviewLabel">Rating</span> <span class="reviewText">@review.rating/10</span></td>
         </tr>
         <tr>
             <td><span class="reviewLabels">Review</span></td>
@@ -27,18 +27,23 @@
     @helper.form( routes.ReviewController.reviewSubmit() ){
         <table>
             <tr>
-                <td>@helper.inputText( form("movieTitle"), '_label -> "Movie Title:", '_showConstraints -> false )</td>
-                <td>@helper.inputText( form("rating"), '_label -> "Rating:", '_showConstraints -> false )</td><td>/10</td>
+                <td>@helper.select( form("movieTitle"), movieList, 'id -> "Movie Title:", '_help -> "", '_showConstraints -> false )</td>
+                <td>@helper.select( form("rating"), Seq(("1","1"),("2","2"),("3","3"),("4","4"),("5","5"),("6","6"),("7","7"),("8","8"),("9","9"),("10","10")), 'id -> "Rating:", '_help -> "", '_showConstraints -> false )</td>
             </tr>
             <tr>
                 <td>@helper.inputText( form("name"), '_label -> "Alias:", '_showConstraints -> false )</td>
             </tr>
             <tr>
-                <td>@helper.inputText( form("review"), '_label -> "Review", '_showConstraints -> false )</td>
+                <td>Review:</td>
+            </tr>
+            <tr>
+                <td>@helper.textarea( form("review"), '_label -> "", '_showConstraints -> false )</td>
             </tr>
         </table>
         <button class="btn btn-primary"type="submit">submit</button>
     }
     </div>
     <br><br>
+
+    @footer.render()
 }

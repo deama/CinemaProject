@@ -6,8 +6,21 @@ body {
     margin-right: auto;
     background-color: #000000e0;
     color: #d9d9d9;
-    text-align: center
+}
+#text {
+    padding: 20px;
+}
 
+#text1 {
+    padding: 20px;
+}
+
+#text2 {
+    padding: 20px;
+}
+
+#text3 {
+    text-align: center;
 }
 
 .button {
@@ -22,12 +35,4 @@ body {
 }
 .button:hover {
     background-color: dodgerblue;
-}
-
-footer {
-    font-family: Raleway, Arial, sans-serif;
-    background-color: #000000e0;
-    text-align: center;
-    padding: 10px;
-    font-color: #d9d9d9
 }
