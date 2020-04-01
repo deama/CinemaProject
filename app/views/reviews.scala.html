@@ -25,7 +25,7 @@
     <br><br><br><br><br><br><br><br>
     <div>
     @helper.form( routes.ReviewController.reviewSubmit() ){
-        <table>
+        <center><table>
             <tr>
                 <td>@helper.inputText( form("movieTitle"), '_label -> "Movie Title:", '_showConstraints -> false )</td>
                 <td>@helper.inputText( form("rating"), '_label -> "Rating:", '_showConstraints -> false )</td><td>/10</td>
@@ -36,8 +36,8 @@
             <tr>
                 <td>@helper.inputText( form("review"), '_label -> "Review", '_showConstraints -> false )</td>
             </tr>
-        </table>
-        <button class="btn btn-primary"type="submit">submit</button>
+        </center> </table>
+        <center><button class="btn btn-primary"type="submit">submit</button></center>
     }
     </div>
     <br><br>
