@@ -11,7 +11,7 @@
             <td><h2>@review.movieTitle</h2></td>
         </tr>
         <tr>
-            <td><span class="reviewLabels">Alias</span> <span class="reviewText">@review.name</span></td><td><span class="reviewLabels">Rating</span> <span class="reviewText">@review.rating/10</span></td>
+            <td><span class="reviewLabels">Alias</span> <span class="reviewText">@review.name</span></td><td class="reviewRating"><span class="reviewLabel">Rating</span> <span class="reviewText">@review.rating/10</span></td>
         </tr>
         <tr>
             <td><span class="reviewLabels">Review</span></td>
@@ -33,7 +33,10 @@
                 <td>@helper.inputText( form("name"), '_label -> "Alias:", '_showConstraints -> false )</td>
             </tr>
             <tr>
-                <td>@helper.inputText( form("review"), '_label -> "Review", '_showConstraints -> false )</td>
+                <td>Review:</td>
+            </tr>
+            <tr>
+                <td>@helper.textarea( form("review"), '_label -> "", '_showConstraints -> false )</td>
             </tr>
         </table>
         <button type="submit">submit</button>
