@@ -14,35 +14,15 @@ import scala.concurrent.duration.Duration
 @Singleton
 class SearchController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction, val db: DBManager) extends AbstractController(cc) with play.api.i18n.I18nSupport
 {
-  def search( title :String ) :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
-    db.findCurrentMovies().map{ films =>
-      var filmList :List[FilmDetails] = null
-      try { filmList = films.filter(film => film.title.toString().toLowerCase.contains(title.toLowerCase) ) }
-      catch{ case ex: NoSuchElementException =>{  } }
+  def search( title :String ) :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
 
-      if( filmList == null )
-      {
-        Await.result(
-        db.findFutureMovies().map { films =>
-          var futureFilmList :List[FutureFilmDetails] = null
-          try { futureFilmList = films.filter(film => film.title.toString().toLowerCase.contains(title.toLowerCase) ) }
-          catch{ case ex: NoSuchElementException =>{  } }
+    val filmList :List[FilmDetails] = Await.result( db.findCurrentMovies().map { films =>
+      films.filter(film => film.title.toString().toLowerCase.contains(title.toLowerCase) )
+    }, Duration.Inf )
+    val futureFilmList :List[FutureFilmDetails] = Await.result( db.findFutureMovies().map { films =>
+      films.filter(film => film.title.toString().toLowerCase.contains(title.toLowerCase) )
+    }, Duration.Inf )
 
-          if( futureFilmList == null )
-          {
-            Ok( views.html.emptySearch() )
-          }
-          else
-          {
-            Ok( views.html.newReleaseListings(futureFilmList) )
-          }
-
-        }, Duration.Inf )
-      }
-      else
-      {
-        Ok( views.html.listings(filmList) )
-      }
-    }
+    Ok( views.html.searchResults(filmList, futureFilmList) )
   }
 }
