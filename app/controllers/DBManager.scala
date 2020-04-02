@@ -26,23 +26,22 @@ import reactivemongo.api.commands.WriteResult
 
 import scala.concurrent.duration.Duration
 
-class DBManager @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
+class DBManager @Inject()(components: ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi: ReactiveMongoApi)
   extends AbstractController(components)
     with MongoController with ReactiveMongoComponents with I18nSupport {
   implicit def ec: ExecutionContext = {
     components.executionContext
   }
 
-  def collectionBookings() :Future[JSONCollection] = {
+  def collectionBookings(): Future[JSONCollection] = {
     database.map(_.collection[JSONCollection]("bookings"))
   }
 
-  def collectionPayments() :Future[JSONCollection] = {
+  def collectionPayments(): Future[JSONCollection] = {
     database.map(_.collection[JSONCollection]("payments"))
   }
 
-  def hash(text :String) :String =
-  {
+  def hash(text: String): String = {
     val secret = "secret"
 
     val sha256_HMAC = Mac.getInstance("HmacSHA256")
@@ -54,22 +53,21 @@ class DBManager @Inject()(components :ControllerComponents, authAction: Authenti
   }
 
 
-
-  def createBooking( movieTitle :String, screening :String, userName :String, adults :Int, children :Int, concession :Int )
-    :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
-    val booking = BookingData(  BSONObjectID.generate().stringify, movieTitle, screening, userName, adults, children, concession )
+  def createBooking(movieTitle: String, screening: String, userName: String, adults: Int, children: Int, concession: Int)
+  : Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
+    val booking = BookingData(BSONObjectID.generate().stringify, movieTitle, screening, userName, adults, children, concession)
 
     val futureResult = collectionBookings().map(_.insert.one(booking))
     //futureResult.map( _ => Ok("submitted") )
-    futureResult.map( _ => Ok( views.html.payment( PaymentForm.paymentForm, movieTitle) ) )
+    futureResult.map(_ => Ok(views.html.payment(PaymentForm.paymentForm, movieTitle)))
   }
 
-  def createPayment( name :String, cardNumber :Int, expDate :String, securityCode :Int, movieTitle :String )
-    :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
+  def createPayment(name: String, cardNumber: Int, expDate: String, securityCode: Int, movieTitle: String)
+  : Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
 
-    val payment = PaymentData(  BSONObjectID.generate().stringify, hash(name), hash(cardNumber.toString), hash(expDate), hash(securityCode.toString), movieTitle )
+    val payment = PaymentData(BSONObjectID.generate().stringify, hash(name), hash(cardNumber.toString), hash(expDate), hash(securityCode.toString), movieTitle)
 
     val futureResult = collectionPayments().map(_.insert.one(payment))
-    futureResult.map( _ => Ok("submitted") )
+    futureResult.map(_ => Ok("Submitted"))
   }
 }
