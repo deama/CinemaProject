@@ -1,20 +1,25 @@
-@( form :Form[BookingForm], movieTitle :String )( implicit messagesProvider :MessagesProvider )
+@(form: Form[BookingForm], movieTitle: String)(implicit messagesProvider: MessagesProvider)
 
-@main("Booking"){
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/booking.css")">
-    <div>
-        @helper.form( routes.BookingController.bookingSubmit(movieTitle) ){
+    @main("Booking") {
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/booking.css")">
+        <div>
+        @helper.form(routes.BookingController.bookingSubmit(movieTitle)) {
             <h2>@movieTitle</h2>
-            @helper.inputText( form("screeningTime"), '_label -> "screening:", '_showConstraints -> false )
-            @helper.inputText( form("nameOfBooker"), '_label -> "your name:", '_showConstraints -> false )
+            @helper.inputText(form("screeningTime"), '_label -> "Screening:", '_showConstraints -> false)
+            @helper.inputText(form("nameOfBooker"), '_label -> "Your name:", '_showConstraints -> false)
             <div class="seats">
-                @helper.inputText( form("adults"), '_label -> "adults:", '_showConstraints -> false )
-                @helper.inputText( form("children"), '_label -> "children:", '_showConstraints -> false )
-                @helper.inputText( form("concession"), '_label -> "concession:", '_showConstraints -> false )
+                @helper.inputText(form("adults"), '_label -> "Adults:", '_showConstraints -> false)
+                @helper.inputText(form("children"), '_label -> "Children:", '_showConstraints -> false)
+                @helper.inputText(form("concession"), '_label -> "Concessions:", '_showConstraints -> false)
             </div>
             <br>
-            <button type="submit">submit booking</button>
-            <br><br><br><br><br><br>
-        }
-    </div>
-}
+            <button type="submit">Submit booking</button>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            }
+        </div>
+    }
