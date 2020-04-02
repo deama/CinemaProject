@@ -1,4 +1,4 @@
-@(form :Form[EmailForm])(implicit messagesProvider: MessagesProvider)
+@(form: Form[EmailForm])(implicit messagesProvider: MessagesProvider)
 
 @main("Contact Us") {
     <head>
@@ -9,7 +9,7 @@
         <div>
             <h1>Contact Us</h1>
             <p>If you need to contact us, please feel free to!</p>
-            <p>Our email address is: cinema(at)qa.com</p>
+            <p>Our email address is: cinema@@qa.com</p>
             <p>Our telephone number is: 0161 393 2271</p>
             <a href="@routes.LocationController.gettingHere">
                 <link ref>
@@ -17,17 +17,26 @@
             </a>
         </div>
     </center>
-    <br><br><br><br><br><br><br><br><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <center><p>Email us:</p></center>
     <center><table>
-    @helper.form( routes.ContactController.emailSubmit() ){
-        @helper.inputText( form("address"), '_label -> "Your email:", '_showConstraints -> false )
-        @helper.inputText( form("subject"), '_label -> "Subject:", '_showConstraints -> false )
+    @helper.form(routes.ContactController.emailSubmit()) {
+        @helper.inputText(form("address"), '_label -> "Your email:", '_showConstraints -> false)
+        @helper.inputText(form("subject"), '_label -> "Subject:", '_showConstraints -> false)
         Content:
-        @helper.textarea( form("content"), '_label -> "", '_showConstraints -> false )
-        <button class="btn btn-primary"type="submit">submit email</button>
-        <br><br>
+        @helper.textarea(form("content"), '_label -> "", '_showConstraints -> false)
+        <button class="btn btn-primary" type="submit">Submit email</button>
+        <br>
+        <br>
         }
     </table></center>
     @footer.render()

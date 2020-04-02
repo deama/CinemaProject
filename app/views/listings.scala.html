@@ -1,20 +1,22 @@
-
 @(filmDetails: List[FilmDetails])
 
 @main("Films") {
     <head>
-        @navigation.render()
+    @navigation.render()
     </head>
 
     <div>
-    @for(filmDetail <- filmDetails){
+    @for(filmDetail <- filmDetails) {
         <a href='/listingGallery/@(filmDetail._id)'>
 
-            <img src = "@{filmDetail.url}" alt = "film poster" style = "width: 250px; height: 300px;"
+            <img src = "@{
+                filmDetail.url
+            }" alt = "film poster" style = "width: 250px;
+                height: 300px;"
             />
         </a>
-            <h3>@filmDetail.title</h3>
-            <h4>Director: @filmDetail.director</h4>
+        <h3>@filmDetail.title</h3>
+        <h4>Director: @filmDetail.director</h4>
 
     }
     </div>
