@@ -16,32 +16,32 @@ class SearchController @Inject()(cc: ControllerComponents, authAction: Authentic
 {
   def search( title :String ) :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
     db.findCurrentMovies().map{ films =>
-      var filmDetails :FilmDetails = null
-      try { filmDetails = films.filter(film => film.title.toString().toLowerCase.contains(title) ).head }
+      var filmList :List[FilmDetails] = null
+      try { filmList = films.filter(film => film.title.toString().toLowerCase.contains(title.toLowerCase) ) }
       catch{ case ex: NoSuchElementException =>{  } }
 
-      if( filmDetails == null )
+      if( filmList == null )
       {
         Await.result(
         db.findFutureMovies().map { films =>
-          var futureFilmDetails :FutureFilmDetails = null
-          try { futureFilmDetails = films.filter(film => film.title.toString().toLowerCase.contains(title) ).head }
+          var futureFilmList :List[FutureFilmDetails] = null
+          try { futureFilmList = films.filter(film => film.title.toString().toLowerCase.contains(title.toLowerCase) ) }
           catch{ case ex: NoSuchElementException =>{  } }
 
-          if( futureFilmDetails == null )
+          if( futureFilmList == null )
           {
             Ok( views.html.emptySearch() )
           }
           else
           {
-            Redirect( routes.FutureMoviesController.futureFilmsInfo(futureFilmDetails._id.toString()) )
+            Ok( views.html.newReleaseListings(futureFilmList) )
           }
 
         }, Duration.Inf )
       }
       else
       {
-        Redirect( routes.ListingGalleryController.currentFilmsInfo(filmDetails._id.toString()) )
+        Ok( views.html.listings(filmList) )
       }
     }
   }
