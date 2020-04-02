@@ -9,11 +9,13 @@ import scala.concurrent._
 import ExecutionContext.Implicits.global
 
 @Singleton
-class ReviewController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction, val db: DBManager) extends AbstractController(cc) with play.api.i18n.I18nSupport {
-  def reviewSubmit(): Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
+class ReviewController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction, val db: DBManager) extends AbstractController(cc) with play.api.i18n.I18nSupport
+{
+  def reviewSubmit() :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
     db.findCurrentMovies().map { films =>
-      var seq = Seq(("", ""))
-      for (film <- films) {
+      var seq = Seq(("",""))
+      for( film <- films )
+      {
         seq = seq :+ (film.title, film.title)
       }
 
@@ -26,7 +28,7 @@ class ReviewController @Inject()(cc: ControllerComponents, authAction: Authentic
     }
   }
 
-  def viewAllReviews(): Action[AnyContent] = authAction { implicit request: Request[AnyContent] =>
-    Redirect(routes.DBManager.getAllReviews)
+  def viewAllReviews() :Action[AnyContent] = authAction { implicit request :Request[AnyContent] =>
+    Redirect(routes.DBManager.getAllReviews )
   }
 }

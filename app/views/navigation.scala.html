@@ -4,34 +4,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
-        function forwardToSearchButton() {
-            if (document.getElementById("inputSearch").value == "") {
-                document.getElementById("buttonSearch").setAttribute("href", "");
-            } else {
-                document.getElementById("buttonSearch").setAttribute("href", @routes.SearchController.search("")+document.getElementById("inputSearch").value);
+        function forwardToSearchButton()
+        {
+            if( document.getElementById("inputSearch").value == "" )
+            {
+                document.getElementById("buttonSearch").setAttribute("href", "" );
+            }
+            else
+            {
+                document.getElementById("buttonSearch").setAttribute("href", @routes.SearchController.search("")+document.getElementById("inputSearch").value );
             }
         }
     </script>
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
     <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
-    <header class="w3-panel w3-center w3-opacity" style="container: 128px 16px">
+    <header class="w3-panel w3-center w3-opacity" style="container:128px 16px">
         <div class="w3-dropdown-hover">
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark nav nav-pills">
-                <a class="navbar-brand" href="#"><img src="@routes.Assets.versioned("images/QA.png")" alt="logo" style="width: 40px;"></a>
+                <a class="navbar-brand" href="#"><img src="@routes.Assets.versioned("images/QA.png")"alt="logo" style="width:40px;"></a>
                 <div class="w3-button w3-blue-grey">
                     <div class="w3-text-goldenrod">
-                        <a href="@routes.HomeController.index()" class="nav-item w3-button w3-mobile w3-hover-teal">Home</a>
-                        <a href="@routes.ListingGalleryController.listingGallery()" class="nav-item w3-button w3-mobile w3-hover-teal">Movie Listing</a>
-                        <a href="@routes.FutureMoviesController.futureListingsGallery()" class="nav-item w3-button w3-mobile w3-hover-teal">New Release Gallery</a>
-                        <a href="@routes.ScreenController.screens()" class="nav-item w3-button w3-mobile w3-hover-teal">Screens</a>
-                        <a href="@routes.ClassificationController.index()" class="nav-item w3-button w3-mobile w3-hover-teal">Classifications</a>
-                        <a href="@routes.ReviewController.viewAllReviews()" class="nav-item w3-button w3-mobile w3-hover-teal">Reviews</a>
-                        <a href="@routes.TimesController.times()" class="nav-item w3-button w3-mobile w3-hover-teal">Opening Times</a>
-                        <a href="@routes.LocationController.gettingHere()" class="nav-item w3-button w3-mobile w3-hover-teal">Getting Here</a>
-                        <a href="@routes.placestogoController.places()" class="nav-item w3-button w3-mobile w3-hover-teal">Places To Go</a>
-                        <a href="@routes.ContactController.contact()" class="nav-item w3-button w3-mobile w3-hover-teal">Contact</a>
-                        <a href="@routes.AboutUsController.aboutUs()" class="nav-item w3-button w3-mobile w3-hover-teal">About Us</a>
+                        <a href="@routes.HomeController.index()" class="nav-item w3-button w3-mobile w3-hover-teal"> Home </a>
+                        <a href="@routes.ListingGalleryController.listingGallery()" class="nav-item w3-button w3-mobile w3-hover-teal"> Movie Listing </a>
+                        <a href="@routes.FutureMoviesController.futureListingsGallery()" class="nav-item w3-button w3-mobile w3-hover-teal"> New Release Gallery </a>
+                        <a href="@routes.ScreenController.screens()" class="nav-item w3-button w3-mobile w3-hover-teal"> Screens </a>
+                        <a href="@routes.ClassificationController.index()" class="nav-item w3-button w3-mobile w3-hover-teal"> Classifications </a>
+                        <a href="@routes.ReviewController.viewAllReviews()" class="nav-item w3-button w3-mobile w3-hover-teal"> Reviews </a>
+                        <a href="@routes.TimesController.times()" class="nav-item w3-button w3-mobile w3-hover-teal"> Opening Times </a>
+                        <a href="@routes.LocationController.gettingHere()" class="nav-item w3-button w3-mobile w3-hover-teal"> Getting Here </a>
+                        <a href="@routes.placestogoController.places()" class="nav-item w3-button w3-mobile w3-hover-teal"> Places To Go </a>
+                        <a href="@routes.ContactController.contact()" class="nav-item w3-button w3-mobile w3-hover-teal"> Contact </a>
+                        <a href="@routes.AboutUsController.aboutUs()" class="nav-item w3-button w3-mobile w3-hover-teal"> About Us </a>
                         <input id="inputSearch" type="text" class="nav-item w3-input" placeholder="Search..">
                         <a href="" id="buttonSearch" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit" onclick="forwardToSearchButton()">Search</button></a>
                     </div>

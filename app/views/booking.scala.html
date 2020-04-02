@@ -1,29 +1,24 @@
 @import views.html.helper.checkbox
-@(form: Form[BookingForm], id: String, movieTitle: String, screeningList: Seq[(String, String)])(implicit messagesProvider: MessagesProvider)
+@( form :Form[BookingForm], id :String, movieTitle :String, screeningList :Seq[(String, String)] )( implicit messagesProvider :MessagesProvider )
 
-@main("Booking") {
+@main("Booking"){
     <head>
         @navigation.render()
         <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/booking.css")">
     </head>
     <div>
-    @helper.form(routes.BookingController.bookingSubmit(id)) {
-        <h2>@movieTitle</h2>
-        @helper.select(form("screeningTime"), screeningList, 'id -> "Screenings", '_help -> "Select one", '_showConstraints -> false)
-        @helper.inputText(form("nameOfBooker"), '_label -> "Your name:", '_showConstraints -> false)
-        <div class="seats">
-            @helper.inputText(form("adults"), '_label -> "Adults:", '_showConstraints -> false)
-            @helper.inputText(form("children"), '_label -> "Children:", '_showConstraints -> false)
-            @helper.inputText(form("concession"), '_label -> "Concessions:", '_showConstraints -> false)
-        </div>
-        <br>
-        <button type="submit">submit booking</button>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        @helper.form( routes.BookingController.bookingSubmit(id) ){
+            <h2>@movieTitle</h2>
+            @helper.select( form("screeningTime"), screeningList, 'id -> "screenings", '_help -> "Select one", '_showConstraints -> false )
+            @helper.inputText( form("nameOfBooker"), '_label -> "your name:", '_showConstraints -> false )
+            <div class="seats">
+                @helper.inputText( form("adults"), '_label -> "adults:", '_showConstraints -> false )
+                @helper.inputText( form("children"), '_label -> "children:", '_showConstraints -> false )
+                @helper.inputText( form("concession"), '_label -> "concession:", '_showConstraints -> false )
+            </div>
+            <br>
+            <button type="submit">submit booking</button>
+            <br><br><br><br><br><br>
         }
     </div>
     @footer.render()

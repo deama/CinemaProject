@@ -1,5 +1,4 @@
 package controllers
-
 import authentication.AuthenticationAction
 import javax.inject._
 import play.api.mvc._
@@ -9,22 +8,23 @@ import models.FutureFilmDetails
 import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class FutureMoviesController @Inject()(cc: ControllerComponents, val mongoService: DBManager) extends AbstractController(cc) {
-  def createFutureFilm(): Action[AnyContent] = Action.async {
-    val actors = List("Tom Cruise", "Val Kilmer", "Jennifer Connelly")
-    val futureResult = mongoService.createFutureMovie(FutureFilmDetails("Top Gun: Maverick", "Joseph Kosinski", actors, "Adventure/Action", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2NGKKI9_WhX5B8FBicetcfvfNE1g-2e--MvIBGdhNOpmNVmUY"))
+class FutureMoviesController @Inject() (cc: ControllerComponents, val mongoService: DBManager) extends AbstractController (cc)
+{
+  def createFutureFilm(): Action[AnyContent] = Action.async{
+    val actors = List("Tom Cruise", "Val Kilmer","Jennifer Connelly")
+    val futureResult = mongoService.createFutureMovie(FutureFilmDetails("Top Gun: Maverick","Joseph Kosinski",actors,"Adventure/Action","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2NGKKI9_WhX5B8FBicetcfvfNE1g-2e--MvIBGdhNOpmNVmUY"))
     futureResult.map(_ => Ok("New Release Movie Created"))
   }
 
   def futureListingsGallery(): Action[AnyContent] = Action.async {
     mongoService.findFutureMovies().map(futureFilmList =>
-      Ok(views.html.newReleaseListings(futureFilmList))
+    Ok(views.html.newReleaseListings(futureFilmList))
     )
   }
 
-  def futureFilmsInfo(id: String): Action[AnyContent] = Action.async { implicit request:
+  def futureFilmsInfo(id:String): Action[AnyContent] = Action.async{ implicit request:
   Request[AnyContent] =>
-    mongoService.findFutureMovies().map { films =>
+    mongoService.findFutureMovies().map{ films =>
       Ok(views.html.futureFilmsInfo(films.filter(film => id == film._id.toString()).head))
     }
   }
