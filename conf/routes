@@ -13,14 +13,14 @@ GET         /times                               controllers.TimesController.tim
 GET         /contact                             controllers.ContactController.contact
 GET         /submitEmail                         controllers.ContactController.emailSubmit()
 
-GET         /booking/:id                         controllers.BookingController.booking(id :String)
-POST        /bookingSubmit/:id                   controllers.BookingController.bookingSubmit(id :String)
-GET         /payment/:movieId/:movieTitle        controllers.PaymentController.paymentSubmit(movieId :String, movieTitle :String)
+GET         /booking/:id                         controllers.BookingController.booking(id: String)
+POST        /bookingSubmit/:id                   controllers.BookingController.bookingSubmit(id: String)
+GET         /payment/:movieId/:movieTitle        controllers.PaymentController.paymentSubmit(movieId: String, movieTitle: String)
 
-GET         /createBooking                       controllers.DBManager.createBooking(movieId :String, movieName :String, screening :String, userName :String, adults :Int, children :Int, concession :Int)
-GET         /createPayment                       controllers.DBManager.createPayment(name :String, cardNumber :Int, expDate :String, securityCode :Int, movieTitle :String)
-GET         /getAllReviews                      controllers.DBManager.getAllReviews()
-GET         /createReview                        controllers.DBManager.createReview(name :String, movieTitle :String, rating :String, review :String)
+GET         /createBooking                       controllers.DBManager.createBooking(movieId: String, movieName: String, screening: String, userName: String, adults: Int, children: Int, concession: Int)
+GET         /createPayment                       controllers.DBManager.createPayment(name: String, cardNumber: Int, expDate: String, securityCode: Int, movieTitle: String)
+GET         /getAllReviews                       controllers.DBManager.getAllReviews()
+GET         /createReview                        controllers.DBManager.createReview(name: String, movieTitle: String, rating: String, review: String)
 
 GET         /reviews                             controllers.ReviewController.viewAllReviews()
 GET         /submitReview                        controllers.ReviewController.reviewSubmit()
@@ -39,4 +39,4 @@ GET         /futureListingGallery/:_id           controllers.FutureMoviesControl
 
 GET         /places                              controllers.placestogoController.places
 
-GET         /search/:title                       controllers.SearchController.search(title :String)
+GET         /search/:title                       controllers.SearchController.search(title: String)

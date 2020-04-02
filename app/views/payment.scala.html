@@ -1,24 +1,24 @@
-@( form :Form[PaymentForm], movieId :String, movieTitle :String )( implicit messagesProvider :MessagesProvider )
+@(form: Form[PaymentForm], movieId: String, movieTitle: String)(implicit messagesProvider: MessagesProvider)
 <body>
-@main("Payment"){
-    <head>
-        @navigation.render()
-        <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/payment.css")">
-    </head>
+    @main("Payment") {
+        <head>
+            @navigation.render()
+            <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/payment.css")">
+        </head>
 
-    <div credit-card-box .panel-title, form-control.error, .label, >
-    @helper.form( routes.PaymentController.paymentSubmit(movieId, movieTitle) ){
-        <h2>Payment for movie: @movieTitle</h2>
-        @helper.inputText( form("name"), '_label -> "name:", '_showConstraints -> false )
-        @helper.inputText( form("cardNumber"), '_label -> "card number:", '_showConstraints -> false )
-        @helper.inputDate( form("expDate"), '_label -> "Expiry date:", '_showConstraints -> false )
-        @helper.inputText( form("securityCode"), '_label -> "security Code (CVC):", '_showConstraints -> false )
+        <div credit-card-box.panel-title, form-control.error,.label, >
+        @helper.form(routes.PaymentController.paymentSubmit(movieId, movieTitle)) {
+            <h2>Payment for booking: @movieTitle</h2>
+            @helper.inputText(form("name"), '_label -> "Name:", '_showConstraints -> false)
+            @helper.inputText(form("cardNumber"), '_label -> "Card Number:", '_showConstraints -> false)
+            @helper.inputDate(form("expDate"), '_label -> "Expiry Date:", '_showConstraints -> false)
+            @helper.inputText(form("securityCode"), '_label -> "Security Code (CVV):", '_showConstraints -> false)
         </div>
         <br>
-        <button type="submit">submit payment</button>
+        <button type="submit">Submit payment</button>
     }
-    </div>
+        </div>
 
-    @footer.render()
-</body>
+        @footer.render()
+    </body>
 }
