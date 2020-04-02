@@ -11,6 +11,7 @@
             <p>Welcome to the QACinema experience</p>
             <center><p>This website will allow you to book seats for movies on demand.</p></center>
             <center><p>For information on viewing times, please click on the movie.</p></center>
+            <center><p>This website will allow you to book seats for movies on demand.</p></center>
             <center><p>QACinema provides free parking for paying customers just outside our premise.</p></center>
             <br><br>
         </center>
@@ -19,9 +20,7 @@
         <div class="imagesScroll">
         @for(filmDetail <- filmDetails) {
             <a href="/listingGallery/@(filmDetail._id)">
-                <div class="col" style="background-color: #000000e0;"><img src = "@filmDetail.url" alt = "film poster" style = "width: 250px;
-                    height: 300px;"/>
-                </div>
+                <div class="col" style="background-color: #000000e0;"><img src = "@filmDetail.url" alt = "film poster" style = "width: 250px; height: 300px;"/></div>
             </a>
         }
         </div>

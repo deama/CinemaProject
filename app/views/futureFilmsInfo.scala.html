@@ -1,8 +1,8 @@
 @(futureFilmDetails: FutureFilmDetails)
 
-@main("Future Listed Films") {
+@main("Future Listed Films"){
     <head>
-    @navigation.render()
+        @navigation.render()
     </head>
     <div>
         <img src = "@{
@@ -14,7 +14,7 @@
         <h4>Director: @futureFilmDetails.director</h4>
         <h5>Actors: </h5>
         <ul>
-        @for(actor <- futureFilmDetails.actors) {
+        @for(actor <-futureFilmDetails.actors) {
             <li>@actor</li>
         }
         </ul>

@@ -23,7 +23,7 @@ import scala.concurrent.duration.Duration
 import scala.io.Source
 
 
-class DBManager @Inject()(components: ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi: ReactiveMongoApi)
+class DBManager @Inject()(components :ControllerComponents, authAction: AuthenticationAction, val reactiveMongoApi :ReactiveMongoApi )
   extends AbstractController(components)
     with MongoController with ReactiveMongoComponents with I18nSupport {
 
@@ -34,28 +34,31 @@ class DBManager @Inject()(components: ControllerComponents, authAction: Authenti
   //==========================================================
   //Collections/Tables
   //----------------------------------------------------------
-  def collectionBookings(): Future[JSONCollection] = {
+  def collectionBookings() :Future[JSONCollection] = {
     database.map(_.collection[JSONCollection]("bookings"))
   }
 
-  def collectionPayments(): Future[JSONCollection] = {
+  def collectionPayments() :Future[JSONCollection] = {
     database.map(_.collection[JSONCollection]("payments"))
   }
 
-  def collectionReviews(): Future[JSONCollection] = {
+  def collectionReviews() :Future[JSONCollection] =
+  {
     database.map(_.collection[JSONCollection]("reviews"))
   }
 
-  def currentMoviesCollection: Future[JSONCollection] = {
+  def currentMoviesCollection: Future[JSONCollection] =
+  {
     database.map(_.collection[JSONCollection]("listings"))
   }
 
-  def futureMoviesCollection: Future[JSONCollection] = {
+  def futureMoviesCollection: Future[JSONCollection] =
+  {
     database.map(_.collection[JSONCollection]("future"))
   }
-
   //----------------------------------------------------------
-  def hash(text: String): String = {
+  def hash(text :String) :String =
+  {
     val secret = "secret"
 
     val sha256_HMAC = Mac.getInstance("HmacSHA256")
@@ -67,76 +70,80 @@ class DBManager @Inject()(components: ControllerComponents, authAction: Authenti
   }
 
 
+
+
+
+
+
   //==========================================================
   //Booking
   //----------------------------------------------------------
-  def createBooking(movieId: String, movieName: String, screening: String, userName: String, adults: Int, children: Int, concession: Int)
-  : Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
-    val booking = BookingData(BSONObjectID.generate().stringify, movieId, screening, userName, adults, children, concession)
+  def createBooking(movieId :String, movieName :String, screening :String, userName :String, adults :Int, children :Int, concession :Int )
+    :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
+    val booking = BookingData(  BSONObjectID.generate().stringify, movieId, screening, userName, adults, children, concession )
 
     val futureResult = collectionBookings().map(_.insert.one(booking))
     //futureResult.map( _ => Ok("submitted") )
-    futureResult.map(_ => Ok(views.html.payment(PaymentForm.paymentForm, movieId, movieName)))
+    futureResult.map( _ => Ok( views.html.payment( PaymentForm.paymentForm, movieId, movieName) ) )
   }
-
   //----------------------------------------------------------
   //==========================================================
   //Payment
   //----------------------------------------------------------
-  def createPayment(name: String, cardNumber: Int, expDate: String, securityCode: Int, movieId: String)
-  : Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
+  def createPayment( name :String, cardNumber :Int, expDate :String, securityCode :Int, movieId :String )
+    :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
 
-    val payment = PaymentData(BSONObjectID.generate().stringify, hash(name), hash(cardNumber.toString), hash(expDate), hash(securityCode.toString), movieId)
+    val payment = PaymentData(  BSONObjectID.generate().stringify, hash(name), hash(cardNumber.toString), hash(expDate), hash(securityCode.toString), movieId )
 
     val futureResult = collectionPayments().map(_.insert.one(payment))
-    futureResult.map(_ => Ok("submitted"))
+    futureResult.map( _ => Ok("submitted") )
   }
-
   //----------------------------------------------------------
   //==========================================================
   //Reviews
   //----------------------------------------------------------
-  def createReview(name: String, movieTitle: String, rating: String, comment: String)
-  : Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
+  def createReview(name :String, movieTitle :String, rating :String, comment :String)
+    :Action[AnyContent] = authAction.async { implicit request :Request[AnyContent] =>
     val badWords = Source.fromFile("public/resources/bad_words.txt").getLines.toList
     var newComment = comment
-    for (badWord <- badWords) {
+    for( badWord <- badWords )
+    {
       newComment = newComment.replaceAll(badWord, "****")
     }
 
 
-    val review: UserReviewData = UserReviewData(BSONObjectID.generate().stringify, name, movieTitle, rating, newComment)
+    val review :UserReviewData = UserReviewData( BSONObjectID.generate().stringify, name, movieTitle, rating, newComment)
 
     val futureResult = collectionReviews().map(_.insert.one(review))
-    futureResult.map(_ => Redirect(routes.ReviewController.viewAllReviews()))
+    futureResult.map( _ => Redirect( routes.ReviewController.viewAllReviews() ) )
   }
 
-  def getAllReviews(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
-    val cursor: Future[Cursor[UserReviewData]] = collectionReviews().map {
-      _.find(Json.obj())
-        .cursor[UserReviewData]()
-    }
+  def getAllReviews() :Action[AnyContent]  = Action.async { implicit request :Request[AnyContent] =>
+      val cursor: Future[Cursor[UserReviewData]] = collectionReviews().map {
+        _.find(Json.obj())
+          .cursor[UserReviewData]()
+      }
 
-    val futureUsersList: Future[List[UserReviewData]] =
-      cursor.flatMap(
-        _.collect[List](-1, Cursor.FailOnError[List[UserReviewData]]())
-      )
+      val futureUsersList: Future[List[UserReviewData]] =
+        cursor.flatMap(
+          _.collect[List](-1, Cursor.FailOnError[List[UserReviewData]]())
+        )
 
-    val films: Future[List[FilmDetails]] = findCurrentMovies().map { films => films }
+      val films :Future[List[FilmDetails]] = findCurrentMovies().map { films => films }
 
-    futureUsersList.map { reviews =>
-      Await.result(
-        films.map { films =>
-          var seq = Seq(("", ""))
-          for (film <- films) {
-            seq = seq :+ (film.title, film.title)
-          }
-          Ok(views.html.reviews(reviews, UserReviewForm.userReviewForm, seq))
-        }, Duration.Inf
-      )
-    }
+      futureUsersList.map { reviews =>
+        Await.result(
+          films.map{ films =>
+            var seq = Seq(("",""))
+            for( film <- films )
+            {
+              seq = seq :+ (film.title, film.title)
+            }
+            Ok(views.html.reviews(reviews, UserReviewForm.userReviewForm, seq))
+          }, Duration.Inf
+        )
+      }
   }
-
   //----------------------------------------------------------
   //==========================================================
   //Listing Gallery
@@ -158,7 +165,7 @@ class DBManager @Inject()(components: ControllerComponents, authAction: Authenti
   }
 
   def findFutureMovies(): Future[List[FutureFilmDetails]] = {
-    futureMoviesCollection.map {
+    futureMoviesCollection.map{
       _.find(Json.obj()).sort(Json.obj("created" -> -1))
         .cursor[FutureFilmDetails]()
     }.flatMap(
@@ -169,9 +176,8 @@ class DBManager @Inject()(components: ControllerComponents, authAction: Authenti
     )
   }
 
-  def createFutureMovie(futureFilmDetails: FutureFilmDetails): Future[WriteResult] = {
+  def createFutureMovie(futureFilmDetails: FutureFilmDetails): Future[WriteResult] ={
     futureMoviesCollection.flatMap(_.insert.one(futureFilmDetails))
   }
-
   //----------------------------------------------------------
 }
