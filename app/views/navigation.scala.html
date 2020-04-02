@@ -36,8 +36,8 @@
                         <a href="@routes.placestogoController.places()" class="nav-item w3-button w3-mobile w3-hover-teal"> Places To Go </a>
                         <a href="@routes.ContactController.contact()" class="nav-item w3-button w3-mobile w3-hover-teal"> Contact </a>
                         <a href="@routes.AboutUsController.aboutUs()" class="nav-item w3-button w3-mobile w3-hover-teal"> About Us </a>
-                        <input type="text" class="nav-item w3-input" placeholder="Search..">
-                        <a href="#" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit">Search</button></a>
+                        <input id="inputSearch" type="text" class="nav-item w3-input" placeholder="Search..">
+                        <a href="" id="buttonSearch" class="nav-item w3-button w3-green"><button class="btn btn-primary" type="submit" onclick="forwardToSearchButton()">Search</button></a>
                     </div>
                 </div>
             </nav>

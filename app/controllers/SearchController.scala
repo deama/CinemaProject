@@ -4,11 +4,12 @@ import java.util.NoSuchElementException
 
 import authentication.AuthenticationAction
 import javax.inject.{Inject, Singleton}
-import models.{BookingForm, FilmDetails, PaymentForm}
+import models.{BookingForm, FilmDetails, FutureFilmDetails, PaymentForm}
 import play.api.mvc.{AbstractController, Action, AnyContent, Call, ControllerComponents, Request}
 
 import scala.concurrent._
 import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
 
 @Singleton
 class SearchController @Inject()(cc: ControllerComponents, authAction: AuthenticationAction, val db: DBManager) extends AbstractController(cc) with play.api.i18n.I18nSupport
@@ -21,7 +22,22 @@ class SearchController @Inject()(cc: ControllerComponents, authAction: Authentic
 
       if( filmDetails == null )
       {
-        Ok( views.html.emptySearch() )
+        Await.result(
+        db.findFutureMovies().map { films =>
+          var futureFilmDetails :FutureFilmDetails = null
+          try { futureFilmDetails = films.filter(film => film.title.toString().toLowerCase.contains(title) ).head }
+          catch{ case ex: NoSuchElementException =>{  } }
+
+          if( futureFilmDetails == null )
+          {
+            Ok( views.html.emptySearch() )
+          }
+          else
+          {
+            Redirect( routes.FutureMoviesController.futureFilmsInfo(futureFilmDetails._id.toString()) )
+          }
+
+        }, Duration.Inf )
       }
       else
       {
