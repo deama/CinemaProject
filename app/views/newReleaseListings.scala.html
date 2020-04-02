@@ -1,23 +1,23 @@
 @(futureFilmDetails: List[FutureFilmDetails])
 
-  @main("Future Releases") {
-  <head>
+@main("Future Releases") {
+    <head>
     @navigation.render()
-  </head>
+    </head>
 
     <div>
     @for(futureFilmDetail <- futureFilmDetails) {
         <a href='/futureListingGallery/@(futureFilmDetail._id)'>
-        <img src = "@{
-            futureFilmDetail.url
-        }" alt = "film poster" style = "width: 250px;
-            height: 300px;">
+            <img src = "@{
+                futureFilmDetail.url
+            }" alt = "film poster" style = "width: 250px;
+                height: 300px;">
         </a>
         <h3>@futureFilmDetail.title</h3>
         <h4>Director: @futureFilmDetail.director</h4>
 
     </div>
-    }
+}
 
     @footer.render()
 }

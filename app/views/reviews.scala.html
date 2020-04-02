@@ -1,18 +1,21 @@
-@( reviews: List[UserReviewData], form :Form[UserReviewForm], movieList :Seq[(String, String)] )( implicit messagesProvider :MessagesProvider )
-@main("Reviews"){
+@(reviews: List[UserReviewData], form: Form[UserReviewForm], movieList: Seq[(String, String)])(implicit messagesProvider: MessagesProvider)
+@main("Reviews") {
     <head>
-        @navigation.render()
+    @navigation.render()
     </head>
     <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/reviews.css")">
 
     <h1>Reviews</h1>
     <table>
-    @for( review <- reviews ) {
+    @for(review <- reviews) {
         <tr>
             <td><h2>@review.movieTitle</h2></td>
         </tr>
         <tr>
-            <td><span class="reviewLabels">Alias</span> <span class="reviewText">@review.name</span></td><td class="reviewRating"><span class="reviewLabel">Rating</span> <span class="reviewText">@review.rating/10</span></td>
+            <td><span class="reviewLabels">Alias</span>
+                <span class="reviewText">@review.name</span></td>
+            <td class="reviewRating"><span class="reviewLabel">Rating</span>
+                <span class="reviewText">@review.rating/10</span></td>
         </tr>
         <tr>
             <td><span class="reviewLabels">Review</span></td>
@@ -22,28 +25,37 @@
         </tr>
     }
     </table>
-    <br><br><br><br><br><br><br><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div>
-    @helper.form( routes.ReviewController.reviewSubmit() ){
+    @helper.form(routes.ReviewController.reviewSubmit()) {
         <center><table>
             <tr>
-                <td>@helper.select( form("movieTitle"), movieList, 'id -> "Movie Title:", '_help -> "", '_showConstraints -> false )</td>
-                <td>@helper.select( form("rating"), Seq(("1","1"),("2","2"),("3","3"),("4","4"),("5","5"),("6","6"),("7","7"),("8","8"),("9","9"),("10","10")), 'id -> "Rating:", '_help -> "", '_showConstraints -> false )</td>
+                <td>@helper.select(form("movieTitle"), movieList, 'id -> "Movie Title:", '_help -> "", '_showConstraints -> false)</td>
+                <td>@helper.select(form("rating"), Seq(("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("7", "7"), ("8", "8"), ("9", "9"), ("10", "10")), 'id -> "Rating:", '_help -> "", '_showConstraints -> false)</td>
             </tr>
             <tr>
-                <td>@helper.inputText( form("name"), '_label -> "Alias:", '_showConstraints -> false )</td>
+                <td>@helper.inputText(form("name"), '_label -> "Alias:", '_showConstraints -> false)</td>
             </tr>
             <tr>
                 <td>Review:</td>
             </tr>
             <tr>
-                <td>@helper.textarea( form("review"), '_label -> "", '_showConstraints -> false )</td>
+                <td>@helper.textarea(form("review"), '_label -> "", '_showConstraints -> false)</td>
             </tr>
-        </center> </table>
-        <center><button class="btn btn-primary"type="submit">submit</button></center>
+        </table>
+        </center>
+        <center><button class="btn btn-primary" type="submit">Submit</button></center>
     }
     </div>
-    <br><br>
+    <br>
+    <br>
 
     @footer.render()
 }
