@@ -37,6 +37,6 @@ GET         /createFutureFilm                    controllers.FutureMoviesControl
 GET         /futureListingGallery                controllers.FutureMoviesController.futureListingsGallery
 GET         /futureListingGallery/:_id           controllers.FutureMoviesController.futureFilmsInfo(_id)
 
-GET         /places                              controllers.PlacesToGoController.places
+GET         /places                              controllers.placestogoController.places
 
 GET         /search/:title                       controllers.SearchController.search(title: String)
